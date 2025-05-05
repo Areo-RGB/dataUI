@@ -141,3 +141,44 @@ export interface PerformanceOverlayProps {
   performanceData?: PerformanceData[]
   // Removed metrics and activeMetrics props as they're no longer needed
 }
+
+// Annotation position types
+export type AnnotationPosition =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "middle-left"
+  | "middle-center"
+  | "middle-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right"
+
+// Text annotation interface
+export interface TextAnnotation {
+  id: string // Unique identifier for the annotation
+  videoUrl: string // URL of the video this annotation belongs to
+  text: string // The text content to display
+
+  // Timing
+  startTime: number // When to start showing the annotation (in seconds)
+  duration: number // How long to show the annotation (in seconds)
+
+  // Positioning - simplified to predefined positions
+  position: AnnotationPosition
+
+  // Optional styling
+  style?: {
+    color?: string // Text color (CSS color value)
+    backgroundColor?: string // Background color with opacity (CSS color value)
+    fontSize?: number // Font size in pixels
+    fontWeight?: string // Font weight (normal, bold, etc.)
+  }
+}
+
+// Video annotation overlay props
+export interface VideoAnnotationOverlayProps {
+  videoUrl: string
+  currentTime: number
+  className?: string
+}

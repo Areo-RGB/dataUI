@@ -12,6 +12,7 @@ import {
   formatDateForDisplay,
 } from "@/lib/data"
 import { useState, useEffect } from "react"
+import { getAnnotationsForVideo } from "@/lib/annotations"
 
 export default function VideosPage() {
   // Get all available athletes
@@ -201,6 +202,24 @@ export default function VideosPage() {
                           {selectedTestType.includes("Sprint") ? "s" : ""}
                         </span>
                       </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Annotations */}
+                {athleteVideo && (
+                  <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                    <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-2">Annotations</h4>
+                    <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-zinc-700 dark:text-zinc-300">Available annotations:</span>
+                        <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                          {athleteVideo ? getAnnotationsForVideo(athleteVideo.url).length : 0}
+                        </span>
+                      </div>
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                        Annotations will appear automatically during video playback
+                      </p>
                     </div>
                   </div>
                 )}

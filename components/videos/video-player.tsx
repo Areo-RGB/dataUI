@@ -18,6 +18,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react"
+import VideoAnnotationOverlay from "@/components/videos/video-annotation-overlay"
 import type { VideoPlayerProps } from "@/types/videos"
 
 export default function VideoPlayer({ src, title, className, poster, autoPlay = false }: VideoPlayerProps) {
@@ -269,6 +270,9 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
         autoPlay={autoPlay}
         playsInline
       />
+
+      {/* Annotation Overlay */}
+      <VideoAnnotationOverlay videoUrl={src} currentTime={currentTime} />
 
       {/* Loading Indicator */}
       {isLoading && (
