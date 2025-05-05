@@ -28,9 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${openSans.variable} font-sans`}>
-        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )
