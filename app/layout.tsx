@@ -1,9 +1,14 @@
 import type React from "react"
-import { Inter } from "next/font/google"
+import { Inter, Open_Sans } from "next/font/google"
 import "./globals.css"
+import "./theme.css"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+})
 
 // Update the metadata title
 export const metadata = {
@@ -22,8 +27,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <body className={`${inter.variable} ${openSans.variable} font-sans`}>
+        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
       </body>
