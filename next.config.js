@@ -1,3 +1,5 @@
+const { withNextVideo } = require("next-video/process")
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -9,6 +11,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Your existing Next.js config
 }
 
-export default nextConfig
+module.exports = withNextVideo(nextConfig)
