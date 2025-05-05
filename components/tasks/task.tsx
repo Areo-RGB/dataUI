@@ -13,20 +13,20 @@ export default function Task() {
 
         <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-6 border border-gray-200 dark:border-[#1F1F23]">
           <Tabs defaultValue="all" className="w-full">
-            <TabsList className="w-full bg-zinc-100 dark:bg-zinc-800 p-1 rounded-lg">
-              <TabsTrigger value="all" className="flex items-center gap-2">
+            <TabsList className="w-full flex h-auto flex-col items-stretch justify-start rounded-md bg-zinc-100 p-1 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400 sm:inline-flex sm:h-10 sm:flex-row sm:items-center sm:justify-center">
+              <TabsTrigger value="all" className="w-full justify-start flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 All Tasks
               </TabsTrigger>
-              <TabsTrigger value="pending" className="flex items-center gap-2">
+              <TabsTrigger value="pending" className="w-full justify-start flex items-center gap-2">
                 <Timer className="w-4 h-4" />
                 Pending
               </TabsTrigger>
-              <TabsTrigger value="in-progress" className="flex items-center gap-2">
+              <TabsTrigger value="in-progress" className="w-full justify-start flex items-center gap-2">
                 <AlertCircle className="w-4 h-4" />
                 In Progress
               </TabsTrigger>
-              <TabsTrigger value="completed" className="flex items-center gap-2">
+              <TabsTrigger value="completed" className="w-full justify-start flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
                 Completed
               </TabsTrigger>

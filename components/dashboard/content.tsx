@@ -15,16 +15,16 @@ export default function Content() {
           <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4 text-left">Leistungsdiagnostik</h2>
 
           <Tabs defaultValue="schnelligkeit" className="w-full">
-            <TabsList className="mb-4">
-              <TabsTrigger value="schnelligkeit" className="flex items-center gap-2">
+            <TabsList className="mb-4 flex h-auto flex-col items-stretch justify-start rounded-md bg-zinc-100 p-1 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400 sm:inline-flex sm:h-10 sm:flex-row sm:items-center sm:justify-center">
+              <TabsTrigger value="schnelligkeit" className="w-full justify-start flex items-center gap-2">
                 <Zap className="w-4 h-4" />
                 Schnelligkeit
               </TabsTrigger>
-              <TabsTrigger value="beweglichkeit" className="flex items-center gap-2">
+              <TabsTrigger value="beweglichkeit" className="w-full justify-start flex items-center gap-2">
                 <Activity className="w-4 h-4" />
                 Beweglichkeit
               </TabsTrigger>
-              <TabsTrigger value="technik" className="flex items-center gap-2">
+               <TabsTrigger value="technik" className="w-full justify-start flex items-center gap-2">
                 <Brain className="w-4 h-4" />
                 Technik
               </TabsTrigger>
