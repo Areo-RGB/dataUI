@@ -1,15 +1,20 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react" // Added useMemo
 import { cn } from "@/lib/utils"
 import { Film } from "lucide-react"
 import type { PerformanceRankingProps } from "@/types/performance"
+import type { ButtonVideoMapping } from "@/types/videos" // Added ButtonVideoMapping type
 import { InCardVideoPlayer } from "@/components/videos/in-card-video-player"
-import { getVideoMappingsForExercise, getVideoUrlForButton, getLabelForButton, hasVideoForButton } from "@/lib/data"
+import { getVideoMappingsForExercise } from "@/lib/data" // Only import what we need
 
+/**
+ * PerformanceRanking component displays a ranking of performance data
+ * and provides video playback functionality for associated videos.
+ */
 export default function PerformanceRanking({
-  title,
-  displayTitle,
+  title, // Key used for data lookup
+  displayTitle, // Optional display title for the UI
   data,
   className,
   unit = "s",
@@ -18,14 +23,25 @@ export default function PerformanceRanking({
   const [isPlayingVideo, setIsPlayingVideo] = useState(false)
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string | undefined>(undefined)
 
-  // Get video mappings for this exercise
-  const videoMappings = getVideoMappingsForExercise(title)
+  // Get video mappings for this exercise using the title prop as the key
+  // This is memoized to prevent unnecessary recalculations
+  const videoMappings: ButtonVideoMapping[] = useMemo(
+    () => getVideoMappingsForExercise(title),
+    [title], // Re-run only if title changes
+  )
 
-  const handlePlayVideo = (buttonIndex: number) => {
-    const videoUrl = getVideoUrlForButton(title, buttonIndex)
+  /**
+   * Handles playing a video when a button is clicked
+   * @param videoUrl The URL of the video to play
+   */
+  const handlePlayVideo = (videoUrl: string | undefined) => {
     if (videoUrl) {
       setCurrentVideoUrl(videoUrl)
       setIsPlayingVideo(true)
+    } else {
+      // Log a warning if the URL is missing when the button is clicked
+      console.warn(`Attempted to play video but URL was undefined for exercise key: ${title}`)
+      // Note: Visual error handling for video load/playback failures is handled within InCardVideoPlayer
     }
   }
 
@@ -56,6 +72,7 @@ export default function PerformanceRanking({
         <>
           <div className="p-4">
             <div className="flex items-center justify-between mb-3">
+              {/* Use displayTitle if available, otherwise fall back to title */}
               <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{displayTitle || title}</h2>
               <div className="flex flex-wrap items-center gap-2 gap-y-1">
                 <div className="flex items-center gap-1">
@@ -124,18 +141,19 @@ export default function PerformanceRanking({
             </div>
           </div>
 
+          {/* Video buttons section - dynamically generated based on available mappings */}
           <div className="p-2 border-t border-zinc-100 dark:border-zinc-800">
             <div className="grid grid-cols-3 gap-2">
-              {[0, 1, 2].map((buttonIndex) => {
-                const hasVideo = hasVideoForButton(title, buttonIndex)
-                const buttonLabel = getLabelForButton(title, buttonIndex) || "Video"
-
-                if (!hasVideo && buttonIndex > 0) return null
+              {videoMappings.map((mapping) => {
+                const hasVideo = !!mapping.videoUrl
+                const buttonLabel = mapping.label || "Video"
+                const accessibilityLabel = `Play video for ${buttonLabel} in ${displayTitle || title} exercise`
 
                 return (
                   <button
-                    key={buttonIndex}
+                    key={mapping.videoUrl || mapping.label} // Use URL or label as key
                     type="button"
+                    aria-label={accessibilityLabel} // Added aria-label for accessibility
                     className={cn(
                       "w-full flex items-center justify-center",
                       "text-xs font-medium",
@@ -144,14 +162,22 @@ export default function PerformanceRanking({
                         ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700"
                         : "bg-zinc-100/50 text-zinc-400 dark:bg-zinc-800/50 dark:text-zinc-500 cursor-not-allowed",
                     )}
-                    onClick={() => hasVideo && handlePlayVideo(buttonIndex)}
+                    onClick={() => hasVideo && handlePlayVideo(mapping.videoUrl)} // Pass URL directly
                     disabled={!hasVideo}
                   >
-                    <Film className="mr-1.5 h-3.5 w-3.5" />
+                    <Film className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" /> {/* Hide icon from screen reader */}
                     <span>{buttonLabel}</span>
                   </button>
                 )
               })}
+              {/* Render empty placeholders if less than 3 videos to maintain grid layout */}
+              {Array.from({ length: Math.max(0, 3 - videoMappings.length) }).map((_, index) => (
+                <div
+                  key={`placeholder-${index}`}
+                  className="w-full h-[31px] rounded-md bg-zinc-100/30 dark:bg-zinc-800/30"
+                  aria-hidden="true"
+                ></div>
+              ))}
             </div>
           </div>
         </>

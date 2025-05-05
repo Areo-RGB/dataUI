@@ -29,8 +29,8 @@ export interface PerformanceComparison extends PerformanceData {
  * Props for performance ranking components
  */
 export interface PerformanceRankingProps {
-  title: string
-  displayTitle?: string
+  title: string // Key used for data lookups (e.g., "10m Sprint")
+  displayTitle?: string // Optional title for display purposes in the header
   data: PerformanceData[]
   className?: string
   unit?: string

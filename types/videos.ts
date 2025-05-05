@@ -184,6 +184,9 @@ export interface VideoAnnotationOverlayProps {
   className?: string
 }
 
+/**
+ * Video data structure for performance videos
+ */
 export interface VideoData {
   url: string
   name: string
@@ -193,6 +196,10 @@ export interface VideoData {
   description?: string
 }
 
+/**
+ * Button to video mapping structure
+ * Used to associate buttons with specific videos in performance cards
+ */
 export interface ButtonVideoMapping {
   buttonIndex: number
   videoUrl: string
