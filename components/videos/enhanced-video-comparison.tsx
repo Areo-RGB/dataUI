@@ -21,44 +21,8 @@ import {
 } from "lucide-react"
 import VideoAnnotation from "@/components/videos/video-annotation"
 import PerformanceOverlay from "@/components/videos/performance-overlay"
-import type { EnhancedVideoComparisonProps, Annotation, MetricData } from "@/types/videos"
-import { getExerciseData } from "@/lib/data"
-
-// Sample performance metrics data for time-series visualization
-const sampleMetrics: MetricData[] = [
-  {
-    id: "speed",
-    name: "Speed",
-    data: Array.from({ length: 100 }, (_, i) => ({
-      time: i * 0.1,
-      value: 15 + Math.sin(i * 0.3) * 5 + Math.random() * 2,
-    })),
-  },
-  {
-    id: "heartRate",
-    name: "Heart Rate",
-    data: Array.from({ length: 100 }, (_, i) => ({
-      time: i * 0.1,
-      value: 140 + Math.sin(i * 0.2) * 20 + Math.random() * 5,
-    })),
-  },
-  {
-    id: "distance",
-    name: "Distance",
-    data: Array.from({ length: 100 }, (_, i) => ({
-      time: i * 0.1,
-      value: i * 0.5,
-    })),
-  },
-  {
-    id: "time",
-    name: "Elapsed Time",
-    data: Array.from({ length: 100 }, (_, i) => ({
-      time: i * 0.1,
-      value: i * 0.1,
-    })),
-  },
-]
+import type { EnhancedVideoComparisonProps, Annotation } from "@/types/videos"
+import { getExerciseData, sampleMetrics } from "@/lib/data"
 
 export default function EnhancedVideoComparison({
   leftVideo,
@@ -392,6 +356,8 @@ export default function EnhancedVideoComparison({
               width={videoDimensions.width}
               height={videoDimensions.height}
               performanceData={leftData}
+              comparisonData={rightData}
+              showComparison={true}
             />
           )}
         </div>
@@ -428,6 +394,8 @@ export default function EnhancedVideoComparison({
               width={videoDimensions.width}
               height={videoDimensions.height}
               performanceData={rightData}
+              comparisonData={leftData}
+              showComparison={true}
             />
           )}
         </div>

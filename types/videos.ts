@@ -139,7 +139,8 @@ export interface PerformanceOverlayProps {
   height: number
   className?: string
   performanceData?: PerformanceData[]
-  // Removed metrics and activeMetrics props as they're no longer needed
+  comparisonData?: PerformanceData[] // Add this line for the second athlete's data
+  showComparison?: boolean // Add this to toggle comparison mode
 }
 
 // Annotation position types
@@ -181,4 +182,13 @@ export interface VideoAnnotationOverlayProps {
   videoUrl: string
   currentTime: number
   className?: string
+}
+
+export interface VideoData {
+  url: string
+  name: string
+  test: string
+  result: number | string
+  date?: string
+  description?: string
 }

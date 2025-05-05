@@ -1,14 +1,15 @@
 import type { PerformanceData, PerformanceDifference, PerformanceComparison } from "@/types/performance"
+import type { VideoData, MetricData } from "@/types/videos"
 
 // Add this new interface at the top of the file with the other type definitions
-export interface VideoData {
-  url: string
-  name: string
-  test: string
-  result: number | string
-  date?: string
-  description?: string
-}
+// export interface VideoData {
+//   url: string
+//   name: string
+//   test: string
+//   result: number | string
+//   date?: string
+//   description?: string
+// }
 
 export const performanceData: PerformanceData[] = [
   { kategorie: "Schnelligkeit", uebung: "10m Sprint", name: "DFB-3", ergebnis: 2.39 },
@@ -491,4 +492,53 @@ export function formatDateForDisplay(dateString?: string): string {
   ]
 
   return `${Number.parseInt(day)} ${months[Number.parseInt(month) - 1]} ${year}`
+}
+
+/**
+ * Sample performance metrics data for time-series visualization
+ */
+export const sampleMetrics: MetricData[] = [
+  {
+    id: "speed",
+    name: "Speed",
+    data: Array.from({ length: 100 }, (_, i) => ({
+      time: i * 0.1,
+      value: 15 + Math.sin(i * 0.3) * 5 + Math.random() * 2,
+    })),
+  },
+  {
+    id: "heartRate",
+    name: "Heart Rate",
+    data: Array.from({ length: 100 }, (_, i) => ({
+      time: i * 0.1,
+      value: 140 + Math.sin(i * 0.2) * 20 + Math.random() * 5,
+    })),
+  },
+  {
+    id: "distance",
+    name: "Distance",
+    data: Array.from({ length: 100 }, (_, i) => ({
+      time: i * 0.1,
+      value: i * 0.5,
+    })),
+  },
+  {
+    id: "time",
+    name: "Elapsed Time",
+    data: Array.from({ length: 100 }, (_, i) => ({
+      time: i * 0.1,
+      value: i * 0.1,
+    })),
+  },
+]
+
+/**
+ * Get metrics data for a specific video
+ * @param videoUrl The URL of the video
+ * @returns Array of metrics data for the video
+ */
+export function getMetricsForVideo(videoUrl: string): MetricData[] {
+  // In a real application, you would fetch metrics specific to the video
+  // For now, we'll return the sample metrics
+  return sampleMetrics
 }
