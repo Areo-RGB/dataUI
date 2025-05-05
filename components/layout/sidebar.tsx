@@ -47,13 +47,13 @@ export default function Sidebar() {
       </button>
       <nav
         className={`
-                fixed inset-y-0 left-0 z-[70] w-64 bg-sidebar transform transition-transform duration-200 ease-in-out
-                lg:translate-x-0 lg:static lg:w-64 border-r border-sidebar-border
+                fixed inset-y-0 left-0 z-[70] w-64 bg-white dark:bg-[#0F0F12] transform transition-transform duration-200 ease-in-out
+                lg:translate-x-0 lg:static lg:w-64 border-r border-gray-200 dark:border-[#1F1F23]
                 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
             `}
       >
         <div className="h-full flex flex-col">
-          <div className="h-16 px-6 flex items-center border-b border-sidebar-border">
+          <div className="h-16 px-6 flex items-center border-b border-gray-200 dark:border-[#1F1F23]">
             <div className="flex items-center gap-3">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/10033-jR3tFDqOJWyEt8gIXb69i6DKZk5mWM.png"
