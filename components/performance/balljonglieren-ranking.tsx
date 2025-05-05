@@ -1,15 +1,16 @@
 import { getExerciseData } from "@/lib/data"
-import PerformanceRanking from "@/components/performance/performance-ranking"
+import PerformanceRanking from "./performance-ranking"
 
 export default function BalljonglierenRanking({ className }: { className?: string }) {
   const data = getExerciseData("Balljonglieren")
 
   return (
     <PerformanceRanking
-      title="Balljonglieren Rankings"
+      title="Balljonglieren"
+      displayTitle="Balljonglieren Rankings"
       data={data}
       className={className}
-      unit=""
+      unit="Punkte"
       sortAscending={false}
     />
   )

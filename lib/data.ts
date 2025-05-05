@@ -1,5 +1,5 @@
 import type { PerformanceData, PerformanceDifference, PerformanceComparison } from "@/types/performance"
-import type { VideoData, MetricData } from "@/types/videos"
+import type { VideoData, MetricData, ButtonVideoMapping } from "@/types/videos"
 
 // Add this new interface at the top of the file with the other type definitions
 // export interface VideoData {
@@ -94,9 +94,7 @@ export const performanceData: PerformanceData[] = [
   { kategorie: "Gewandtheit", uebung: "Dribbling", name: "Bent", ergebnis: 10.28 },
 ]
 
-// Update the videoData array to correctly associate the videos with Finley and Bent
-// Replace the existing videoData array with this updated one:
-
+// Update the videoData array to include videos for each button in the performance cards
 export const videoData: VideoData[] = [
   // Gewandtheit videos
   {
@@ -106,6 +104,7 @@ export const videoData: VideoData[] = [
     result: 7.81,
     date: "15-05-2023",
     description: "Technique analysis focusing on agility and movement patterns",
+    buttonIndex: 0, // First button
   },
   {
     url: "https://data3.fra1.cdn.digitaloceanspaces.com/6.webm",
@@ -114,16 +113,18 @@ export const videoData: VideoData[] = [
     result: 8.14,
     date: "02-06-2023",
     description: "Follow-up assessment of agility performance",
+    buttonIndex: 1, // Second button
   },
 
   // 10m Sprint videos
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint1.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4",
     name: "Finley",
     test: "10m Sprint",
     result: 2.0,
     date: "10-05-2023",
     description: "10m sprint acceleration analysis",
+    buttonIndex: 0, // First button
   },
   {
     url: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint2.webm",
@@ -132,6 +133,16 @@ export const videoData: VideoData[] = [
     result: 2.16,
     date: "10-05-2023",
     description: "10m sprint technique assessment",
+    buttonIndex: 1, // Second button
+  },
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/999_tvai.mp4",
+    name: "Bent",
+    test: "10m Sprint",
+    result: 2.19,
+    date: "15-07-2023",
+    description: "10m sprint technique comparison",
+    buttonIndex: 2, // Third button
   },
 
   // Dribbling videos
@@ -142,6 +153,7 @@ export const videoData: VideoData[] = [
     result: 10.27,
     date: "28-04-2023",
     description: "Ball control and dribbling technique analysis",
+    buttonIndex: 0, // First button
   },
   {
     url: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble2.webm",
@@ -150,6 +162,7 @@ export const videoData: VideoData[] = [
     result: 10.28,
     date: "28-04-2023",
     description: "Dribbling speed and precision assessment",
+    buttonIndex: 1, // Second button
   },
 
   // Ballkontrolle videos
@@ -160,6 +173,7 @@ export const videoData: VideoData[] = [
     result: 10.82,
     date: "05-05-2023",
     description: "Ball control under pressure analysis",
+    buttonIndex: 0, // First button
   },
   {
     url: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol2.webm",
@@ -168,8 +182,136 @@ export const videoData: VideoData[] = [
     result: 8.95,
     date: "05-05-2023",
     description: "Technical ball handling assessment",
+    buttonIndex: 1, // Second button
+  },
+
+  // 20m Sprint videos
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint1.webm",
+    name: "Finley",
+    test: "20m Sprint",
+    result: 3.59,
+    date: "10-05-2023",
+    description: "20m sprint full analysis",
+    buttonIndex: 0, // First button
+  },
+
+  // Balljonglieren videos
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/f1.webm",
+    name: "Finley",
+    test: "Balljonglieren",
+    result: 0.0,
+    date: "20-05-2023",
+    description: "Ball juggling technique assessment",
+    buttonIndex: 0, // First button
   },
 ]
+
+// Define button video mappings for each performance card
+export const buttonVideoMappings: Record<string, ButtonVideoMapping[]> = {
+  "10m Sprint": [
+    {
+      buttonIndex: 0,
+      videoUrl:
+        "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4",
+      label: "Finley",
+    },
+    {
+      buttonIndex: 1,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint2.webm",
+      label: "Alex",
+    },
+    {
+      buttonIndex: 2,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/999_tvai.mp4",
+      label: "Bent",
+    },
+  ],
+  "20m Sprint": [
+    {
+      buttonIndex: 0,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint1.webm",
+      label: "Finley",
+    },
+    {
+      buttonIndex: 1,
+      videoUrl:
+        "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4",
+      label: "Technique",
+    },
+    {
+      buttonIndex: 2,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/999_tvai.mp4",
+      label: "Analysis",
+    },
+  ],
+  Gewandtheit: [
+    {
+      buttonIndex: 0,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/3.webm",
+      label: "Finley",
+    },
+    {
+      buttonIndex: 1,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/6.webm",
+      label: "Bent",
+    },
+  ],
+  Dribbling: [
+    {
+      buttonIndex: 0,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble1.webm",
+      label: "Finley",
+    },
+    {
+      buttonIndex: 1,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble2.webm",
+      label: "Bent",
+    },
+  ],
+  Ballkontrolle: [
+    {
+      buttonIndex: 0,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol1.webm",
+      label: "Finley",
+    },
+    {
+      buttonIndex: 1,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol2.webm",
+      label: "Bent",
+    },
+  ],
+  Balljonglieren: [
+    {
+      buttonIndex: 0,
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/f1.webm",
+      label: "Finley",
+    },
+  ],
+}
+
+// No changes needed - just confirming the structure is correct
+
+// The workflow starts with these two data structures:
+// 1. videoData array - contains all video information
+// 2. buttonVideoMappings object - maps buttons to videos for each exercise
+
+// For example, for 10m Sprint:
+// buttonVideoMappings["10m Sprint"] = [
+//   {
+//     buttonIndex: 0,
+//     videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4",
+//     label: "Finley",
+//   },
+//   ...
+// ]
+
+// And the helper functions that connect the data to the UI:
+// - getVideoUrlForButton(exercise, buttonIndex)
+// - getLabelForButton(exercise, buttonIndex)
+// - hasVideoForButton(exercise, buttonIndex)
+// - getVideoMappingsForExercise(exercise)
 
 // Helper functions to work with the data
 
@@ -541,4 +683,45 @@ export function getMetricsForVideo(videoUrl: string): MetricData[] {
   // In a real application, you would fetch metrics specific to the video
   // For now, we'll return the sample metrics
   return sampleMetrics
+}
+
+/**
+ * Get video URL for a specific button in a performance card
+ * @param exercise The exercise name (e.g., "10m Sprint")
+ * @param buttonIndex The index of the button (0, 1, or 2)
+ * @returns Video URL for the specified button or undefined if not found
+ */
+export function getVideoUrlForButton(exercise: string, buttonIndex: number): string | undefined {
+  const mapping = buttonVideoMappings[exercise]?.find((m) => m.buttonIndex === buttonIndex)
+  return mapping?.videoUrl
+}
+
+/**
+ * Get all video mappings for a specific exercise
+ * @param exercise The exercise name (e.g., "10m Sprint")
+ * @returns Array of button video mappings for the exercise
+ */
+export function getVideoMappingsForExercise(exercise: string): ButtonVideoMapping[] {
+  return buttonVideoMappings[exercise] || []
+}
+
+/**
+ * Get label for a specific button in a performance card
+ * @param exercise The exercise name (e.g., "10m Sprint")
+ * @param buttonIndex The index of the button (0, 1, or 2)
+ * @returns Label for the specified button or undefined if not found
+ */
+export function getLabelForButton(exercise: string, buttonIndex: number): string | undefined {
+  const mapping = buttonVideoMappings[exercise]?.find((m) => m.buttonIndex === buttonIndex)
+  return mapping?.label
+}
+
+/**
+ * Check if a button has a video assigned
+ * @param exercise The exercise name (e.g., "10m Sprint")
+ * @param buttonIndex The index of the button (0, 1, or 2)
+ * @returns Boolean indicating if the button has a video assigned
+ */
+export function hasVideoForButton(exercise: string, buttonIndex: number): boolean {
+  return !!getVideoUrlForButton(exercise, buttonIndex)
 }

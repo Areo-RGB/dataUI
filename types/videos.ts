@@ -192,3 +192,9 @@ export interface VideoData {
   date?: string
   description?: string
 }
+
+export interface ButtonVideoMapping {
+  buttonIndex: number
+  videoUrl: string
+  label: string
+}

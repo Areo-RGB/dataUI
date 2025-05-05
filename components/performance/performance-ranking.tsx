@@ -5,21 +5,28 @@ import { cn } from "@/lib/utils"
 import { Film } from "lucide-react"
 import type { PerformanceRankingProps } from "@/types/performance"
 import { InCardVideoPlayer } from "@/components/videos/in-card-video-player"
+import { getVideoMappingsForExercise, getVideoUrlForButton, getLabelForButton, hasVideoForButton } from "@/lib/data"
 
 export default function PerformanceRanking({
   title,
+  displayTitle,
   data,
   className,
   unit = "s",
   sortAscending = true,
 }: PerformanceRankingProps) {
   const [isPlayingVideo, setIsPlayingVideo] = useState(false)
-  // Using a more reliable MP4 format
-  const videoUrl =
-    "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4"
+  const [currentVideoUrl, setCurrentVideoUrl] = useState<string | undefined>(undefined)
 
-  const handlePlayVideo = () => {
-    setIsPlayingVideo(true)
+  // Get video mappings for this exercise
+  const videoMappings = getVideoMappingsForExercise(title)
+
+  const handlePlayVideo = (buttonIndex: number) => {
+    const videoUrl = getVideoUrlForButton(title, buttonIndex)
+    if (videoUrl) {
+      setCurrentVideoUrl(videoUrl)
+      setIsPlayingVideo(true)
+    }
   }
 
   const handleCloseVideo = () => {
@@ -44,12 +51,12 @@ export default function PerformanceRanking({
         className,
       )}
     >
-      <InCardVideoPlayer videoUrl={videoUrl} isPlaying={isPlayingVideo} onClose={handleCloseVideo} />
+      <InCardVideoPlayer videoUrl={currentVideoUrl || ""} isPlaying={isPlayingVideo} onClose={handleCloseVideo} />
       {!isPlayingVideo && (
         <>
           <div className="p-4">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{title}</h2>
+              <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{displayTitle || title}</h2>
               <div className="flex flex-wrap items-center gap-2 gap-y-1">
                 <div className="flex items-center gap-1">
                   <div className="w-3 h-3 rounded-full border-2 border-blue-300 dark:border-blue-700/60"></div>
@@ -119,64 +126,32 @@ export default function PerformanceRanking({
 
           <div className="p-2 border-t border-zinc-100 dark:border-zinc-800">
             <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                className={cn(
-                  "w-full flex items-center justify-center",
-                  "text-xs font-medium",
-                  "rounded-md px-2 py-1.5",
-                  "bg-zinc-100 text-zinc-900 hover:bg-zinc-200",
-                  "dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700",
-                )}
-                onClick={handlePlayVideo}
-              >
-                <Film className="mr-1.5 h-3.5 w-3.5" />
-                <span>Video</span>
-              </button>
-              <button
-                type="button"
-                className={cn(
-                  "w-full flex items-center justify-center",
-                  "py-2 px-3 rounded-lg",
-                  "text-xs font-medium",
-                  "bg-gradient-to-r from-zinc-900 to-zinc-800",
-                  "dark:from-zinc-50 dark:to-zinc-200",
-                  "text-zinc-50 dark:text-zinc-900",
-                  "hover:from-zinc-800 hover:to-zinc-700",
-                  "dark:hover:from-zinc-200 dark:hover:to-zinc-300",
-                  "shadow-sm hover:shadow",
-                  "transform transition-all duration-200",
-                  "hover:-translate-y-0.5",
-                  "active:translate-y-0",
-                  "focus:outline-none focus:ring-2",
-                  "focus:ring-zinc-500 dark:focus:ring-zinc-400",
-                  "focus:ring-offset-2 dark:focus:ring-offset-zinc-900",
-                )}
-              >
-                <Film className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                className={cn(
-                  "w-full flex items-center justify-center",
-                  "py-2 px-3 rounded-lg",
-                  "text-xs font-medium",
-                  "bg-gradient-to-r from-zinc-900 to-zinc-800",
-                  "dark:from-zinc-50 dark:to-zinc-200",
-                  "text-zinc-50 dark:text-zinc-900",
-                  "hover:from-zinc-800 hover:to-zinc-700",
-                  "dark:hover:from-zinc-200 dark:hover:to-zinc-300",
-                  "shadow-sm hover:shadow",
-                  "transform transition-all duration-200",
-                  "hover:-translate-y-0.5",
-                  "active:translate-y-0",
-                  "focus:outline-none focus:ring-2",
-                  "focus:ring-zinc-500 dark:focus:ring-zinc-400",
-                  "focus:ring-offset-2 dark:focus:ring-offset-zinc-900",
-                )}
-              >
-                <Film className="w-4 h-4" />
-              </button>
+              {[0, 1, 2].map((buttonIndex) => {
+                const hasVideo = hasVideoForButton(title, buttonIndex)
+                const buttonLabel = getLabelForButton(title, buttonIndex) || "Video"
+
+                if (!hasVideo && buttonIndex > 0) return null
+
+                return (
+                  <button
+                    key={buttonIndex}
+                    type="button"
+                    className={cn(
+                      "w-full flex items-center justify-center",
+                      "text-xs font-medium",
+                      "rounded-md px-2 py-1.5",
+                      hasVideo
+                        ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700"
+                        : "bg-zinc-100/50 text-zinc-400 dark:bg-zinc-800/50 dark:text-zinc-500 cursor-not-allowed",
+                    )}
+                    onClick={() => hasVideo && handlePlayVideo(buttonIndex)}
+                    disabled={!hasVideo}
+                  >
+                    <Film className="mr-1.5 h-3.5 w-3.5" />
+                    <span>{buttonLabel}</span>
+                  </button>
+                )
+              })}
             </div>
           </div>
         </>

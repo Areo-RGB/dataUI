@@ -30,6 +30,7 @@ export interface PerformanceComparison extends PerformanceData {
  */
 export interface PerformanceRankingProps {
   title: string
+  displayTitle?: string
   data: PerformanceData[]
   className?: string
   unit?: string
