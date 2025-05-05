@@ -206,15 +206,6 @@ export const videoData: VideoData[] = [
     description: "Ball juggling technique assessment",
     buttonIndex: 0, // First button
   },
-  {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/6.mp4",
-    name: "Alex",
-    test: "Balljonglieren",
-    result: 3.0,
-    date: "22-05-2023",
-    description: "Advanced ball juggling demonstration",
-    buttonIndex: 1, // Second button
-  },
 ]
 
 // Define button video mappings for each performance card
@@ -296,11 +287,6 @@ export const buttonVideoMappings: Record<string, ButtonVideoMapping[]> = {
       buttonIndex: 0,
       videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/f1.webm",
       label: "Finley",
-    },
-    {
-      buttonIndex: 1,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/6.mp4",
-      label: "Alex",
     },
   ],
 }
