@@ -421,7 +421,7 @@ export default function EnhancedVideoComparison({
         </div>
 
         {/* Control Buttons */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center space-x-3">
             {/* Play/Pause */}
             <button
@@ -471,7 +471,7 @@ export default function EnhancedVideoComparison({
             </button>
 
             {/* Playback Speed */}
-            <div className="flex items-center space-x-1">
+            <div className="flex flex-wrap items-center gap-x-1 gap-y-1">
               <button
                 onClick={() => changePlaybackSpeed(0.25)}
                 className={cn(

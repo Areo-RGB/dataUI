@@ -29,7 +29,7 @@ export default function PerformanceRanking({
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{title}</h2>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 gap-y-1">
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full border-2 border-blue-300 dark:border-blue-700/60"></div>
               <span className="text-xs text-zinc-600 dark:text-zinc-400">Benchmark</span>
