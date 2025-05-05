@@ -15,7 +15,8 @@ export default function PerformanceRanking({
 }: PerformanceRankingProps) {
   const [isPlayingVideo, setIsPlayingVideo] = useState(false)
   // Using a more reliable MP4 format
-  const videoUrl = "https://data3.fra1.cdn.digitaloceanspaces.com/999_tvai.mp4"
+  const videoUrl =
+    "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4"
 
   const handlePlayVideo = () => {
     setIsPlayingVideo(true)

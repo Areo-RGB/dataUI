@@ -16,40 +16,18 @@ export function InCardVideoPlayer({ videoUrl, isPlaying, onClose, className }: I
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [retryCount, setRetryCount] = useState(0)
-  const [signedUrl, setSignedUrl] = useState<string | null>(null)
 
   // Try to determine if we should use an MP4 fallback
   const useFallback = videoUrl.endsWith(".webm")
   const fallbackUrl = useFallback ? videoUrl.replace(".webm", ".mp4") : null
 
-  // Get a signed URL for the video
   useEffect(() => {
-    if (!isPlaying) return
-
-    const getSignedUrl = async (url: string) => {
-      try {
-        setIsLoading(true)
-        const response = await fetch(`/api/video-url?url=${encodeURIComponent(url)}`)
-
-        if (!response.ok) {
-          throw new Error("Failed to get signed URL")
-        }
-
-        const data = await response.json()
-        setSignedUrl(data.url)
-      } catch (err) {
-        console.error("Error getting signed URL:", err)
-        setError("Failed to authenticate video access. Please try again.")
-        setIsLoading(false)
-      }
+    if (!isPlaying) {
+      setError(null)
+      setIsLoading(true)
+      setRetryCount(0)
+      return
     }
-
-    getSignedUrl(videoUrl)
-  }, [isPlaying, videoUrl, retryCount])
-
-  // Play the video when we have a signed URL
-  useEffect(() => {
-    if (!isPlaying || !signedUrl || !videoRef.current) return
 
     const playVideo = (url: string) => {
       if (videoRef.current) {
@@ -65,23 +43,9 @@ export function InCardVideoPlayer({ videoUrl, isPlaying, onClose, className }: I
           console.error("Error playing video:", err)
 
           // If we have a fallback URL and haven't tried it yet, try the fallback
-          if (fallbackUrl && videoUrl !== fallbackUrl) {
-            console.log("Trying fallback URL")
-            // Reset signed URL and get a new one for the fallback
-            setSignedUrl(null)
-            const getSignedUrl = async () => {
-              try {
-                const response = await fetch(`/api/video-url?url=${encodeURIComponent(fallbackUrl)}`)
-                if (!response.ok) throw new Error("Failed to get signed URL for fallback")
-                const data = await response.json()
-                setSignedUrl(data.url)
-              } catch (err) {
-                console.error("Error getting signed URL for fallback:", err)
-                setError("Unable to play this video. The format may not be supported by your browser.")
-                setIsLoading(false)
-              }
-            }
-            getSignedUrl()
+          if (fallbackUrl && url !== fallbackUrl) {
+            console.log("Trying fallback URL:", fallbackUrl)
+            playVideo(fallbackUrl)
           } else {
             setError("Unable to play this video. The format may not be supported by your browser.")
             setIsLoading(false)
@@ -90,7 +54,7 @@ export function InCardVideoPlayer({ videoUrl, isPlaying, onClose, className }: I
       }
     }
 
-    playVideo(signedUrl)
+    playVideo(videoUrl)
 
     return () => {
       if (videoRef.current) {
@@ -99,7 +63,7 @@ export function InCardVideoPlayer({ videoUrl, isPlaying, onClose, className }: I
         videoRef.current.load()
       }
     }
-  }, [isPlaying, signedUrl, videoUrl, fallbackUrl])
+  }, [isPlaying, videoUrl, fallbackUrl, retryCount])
 
   const handleVideoLoaded = () => {
     setIsLoading(false)
@@ -126,7 +90,6 @@ export function InCardVideoPlayer({ videoUrl, isPlaying, onClose, className }: I
 
   const handleRetry = () => {
     setRetryCount((prev) => prev + 1)
-    setSignedUrl(null)
     setIsLoading(true)
     setError(null)
   }
