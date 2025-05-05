@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { Home, Menu, ClipboardList, BarChart2 } from "lucide-react"
+import { Home, Menu, ClipboardList, Film } from "lucide-react"
 
 import Link from "next/link"
 import { useState } from "react"
@@ -79,8 +79,8 @@ export default function Sidebar() {
                   <NavItem href="/task" icon={ClipboardList}>
                     Task
                   </NavItem>
-                  <NavItem href="/kpi" icon={BarChart2}>
-                    KPI
+                  <NavItem href="/videos" icon={Film}>
+                    Videos
                   </NavItem>
                 </div>
               </div>

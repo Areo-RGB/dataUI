@@ -1,14 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Film } from "lucide-react"
-import type { PerformanceData } from "@/lib/data"
-
-interface PerformanceRankingProps {
-  title: string
-  data: PerformanceData[]
-  className?: string
-  unit?: string
-  sortAscending?: boolean
-}
+import type { PerformanceRankingProps } from "@/types/performance"
 
 export default function PerformanceRanking({
   title,

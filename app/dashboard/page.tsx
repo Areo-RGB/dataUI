@@ -1,4 +1,4 @@
-import Dashboard from "@/components/dataui/dashboard"
+import Dashboard from "@/components/dashboard/dashboard"
 
 export default function DashboardPage() {
   return <Dashboard />

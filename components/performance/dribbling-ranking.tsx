@@ -1,5 +1,5 @@
 import { getExerciseData } from "@/lib/data"
-import PerformanceRanking from "./performance-ranking"
+import PerformanceRanking from "@/components/performance/performance-ranking"
 
 export default function DribblingRanking({ className }: { className?: string }) {
   const data = getExerciseData("Dribbling")

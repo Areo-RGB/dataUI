@@ -1,42 +1,15 @@
 import { cn } from "@/lib/utils"
-import {
-  Calendar,
-  type LucideIcon,
-  ArrowRight,
-  CheckCircle2,
-  Timer,
-  AlertCircle,
-  PiggyBank,
-  TrendingUp,
-  CreditCard,
-} from "lucide-react"
+import { Calendar, ArrowRight, CheckCircle2, Timer, AlertCircle, PiggyBank, TrendingUp, CreditCard } from "lucide-react"
 import React from "react"
+import type { ListItem, List03Props, IconStylesConfig, StatusConfigMap } from "@/types/tasks"
 
-interface ListItem {
-  id: string
-  title: string
-  subtitle: string
-  icon: LucideIcon
-  iconStyle: string
-  date: string
-  time?: string
-  amount?: string
-  status: "pending" | "in-progress" | "completed"
-  progress?: number
-}
-
-interface List03Props {
-  items?: ListItem[]
-  className?: string
-}
-
-const iconStyles = {
+const iconStyles: IconStylesConfig = {
   savings: "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
   investment: "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
   debt: "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
 }
 
-const statusConfig = {
+const statusConfig: StatusConfigMap = {
   pending: {
     icon: Timer,
     class: "text-amber-600 dark:text-amber-400",

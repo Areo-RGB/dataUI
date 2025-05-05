@@ -1,4 +1,4 @@
-import Task from "@/components/dataui/task"
+import Task from "@/components/tasks/task"
 
 export default function TaskPage() {
   return <Task />

@@ -1,14 +1,10 @@
 "use client"
 
-import type { ReactNode } from "react"
-import Sidebar from "./sidebar"
-import TopNav from "./top-nav"
+import Sidebar from "@/components/layout/sidebar"
+import TopNav from "@/components/layout/top-nav"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-
-interface LayoutProps {
-  children: ReactNode
-}
+import type { LayoutProps } from "@/types/layout"
 
 export default function Layout({ children }: LayoutProps) {
   const { theme } = useTheme()

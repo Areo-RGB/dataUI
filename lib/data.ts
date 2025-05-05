@@ -1,8 +1,13 @@
-export interface PerformanceData {
-  kategorie: string
-  uebung: string
+import type { PerformanceData, PerformanceDifference, PerformanceComparison } from "@/types/performance"
+
+// Add this new interface at the top of the file with the other type definitions
+export interface VideoData {
+  url: string
   name: string
-  ergebnis: number | string
+  test: string
+  result: number | string
+  date?: string
+  description?: string
 }
 
 export const performanceData: PerformanceData[] = [
@@ -88,6 +93,83 @@ export const performanceData: PerformanceData[] = [
   { kategorie: "Gewandtheit", uebung: "Dribbling", name: "Bent", ergebnis: 10.28 },
 ]
 
+// Update the videoData array to correctly associate the videos with Finley and Bent
+// Replace the existing videoData array with this updated one:
+
+export const videoData: VideoData[] = [
+  // Gewandtheit videos
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/3.webm",
+    name: "Finley",
+    test: "Gewandtheit",
+    result: 7.81,
+    date: "2023-05-15",
+    description: "Technique analysis focusing on agility and movement patterns",
+  },
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/6.webm",
+    name: "Bent",
+    test: "Gewandtheit",
+    result: 8.14,
+    date: "2023-06-02",
+    description: "Follow-up assessment of agility performance",
+  },
+
+  // 10m Sprint videos
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint1.webm",
+    name: "Finley",
+    test: "10m Sprint",
+    result: 2.0,
+    date: "2023-05-10",
+    description: "10m sprint acceleration analysis",
+  },
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint2.webm",
+    name: "Alex",
+    test: "10m Sprint",
+    result: 2.16,
+    date: "2023-05-10",
+    description: "10m sprint technique assessment",
+  },
+
+  // Dribbling videos
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble1.webm",
+    name: "Finley",
+    test: "Dribbling",
+    result: 10.27,
+    date: "2023-04-28",
+    description: "Ball control and dribbling technique analysis",
+  },
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble2.webm",
+    name: "Bent",
+    test: "Dribbling",
+    result: 10.28,
+    date: "2023-04-28",
+    description: "Dribbling speed and precision assessment",
+  },
+
+  // Ballkontrolle videos
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol1.webm",
+    name: "Finley",
+    test: "Ballkontrolle",
+    result: 10.82,
+    date: "2023-05-05",
+    description: "Ball control under pressure analysis",
+  },
+  {
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol2.webm",
+    name: "Bent",
+    test: "Ballkontrolle",
+    result: 8.95,
+    date: "2023-05-05",
+    description: "Technical ball handling assessment",
+  },
+]
+
 // Helper functions to work with the data
 
 // Get unique categories
@@ -144,12 +226,6 @@ const higherIsBetter = ["Balljonglieren", "YoYo IR1"]
  * @param exercise Exercise name (used to determine if higher or lower is better)
  * @returns Object containing percentage difference and improvement status
  */
-export interface PerformanceDifference {
-  percentDifference: number // Percentage difference (positive means improvement)
-  isImprovement: boolean // Whether the difference represents an improvement
-  rawDifference: number // Raw numerical difference
-}
-
 export function calculatePerformanceDifference(
   value1: number | string,
   value2: number | string,
@@ -190,11 +266,6 @@ export function calculatePerformanceDifference(
  * @param data2 Second performance data set (reference)
  * @returns Array of performance data with difference calculations
  */
-export interface PerformanceComparison extends PerformanceData {
-  difference: PerformanceDifference
-  referenceValue: number | string
-}
-
 export function comparePerformanceData(data1: PerformanceData[], data2: PerformanceData[]): PerformanceComparison[] {
   const result: PerformanceComparison[] = []
 
@@ -255,4 +326,100 @@ export function comparePlayerWithPlayer(player1: string, player2: string): Perfo
   const player2Data = getPlayerData(player2)
 
   return comparePerformanceData(player1Data, player2Data)
+}
+
+// Add these helper functions at the end of the file
+
+/**
+ * Get video data by athlete name
+ * @param name Athlete name
+ * @returns Array of video data for the specified athlete
+ */
+export function getVideosByAthlete(name: string): VideoData[] {
+  return videoData.filter((video) => video.name === name)
+}
+
+/**
+ * Get video data by test type
+ * @param test Test type
+ * @returns Array of video data for the specified test
+ */
+export function getVideosByTest(test: string): VideoData[] {
+  return videoData.filter((video) => video.test === test)
+}
+
+/**
+ * Get video data by URL
+ * @param url Video URL
+ * @returns Video data for the specified URL or undefined if not found
+ */
+export function getVideoByUrl(url: string): VideoData | undefined {
+  return videoData.find((video) => video.url === url)
+}
+
+/**
+ * Get performance data for a specific video
+ * @param url Video URL
+ * @returns Performance data associated with the video
+ */
+export function getPerformanceDataForVideo(url: string): PerformanceData[] {
+  const video = getVideoByUrl(url)
+  if (!video) return []
+
+  // Get all performance data for the athlete and test
+  return performanceData.filter((data) => data.name === video.name && data.uebung === video.test)
+}
+
+/**
+ * Get all available test types that have videos
+ * @returns Array of unique test types that have videos
+ */
+export function getAvailableTestTypes(): string[] {
+  return [...new Set(videoData.map((video) => video.test))]
+}
+
+/**
+ * Get all available athletes that have videos
+ * @returns Array of unique athlete names that have videos
+ */
+export function getAvailableAthletes(): string[] {
+  return [...new Set(videoData.map((video) => video.name))]
+}
+
+/**
+ * Get all available athletes for a specific test type
+ * @param testType The test type to filter by
+ * @returns Array of unique athlete names that have videos for the specified test
+ */
+export function getAthletesForTestType(testType: string): string[] {
+  return [...new Set(videoData.filter((video) => video.test === testType).map((video) => video.name))]
+}
+
+/**
+ * Get all available test types for a specific athlete
+ * @param athleteName The athlete name to filter by
+ * @returns Array of unique test types that have videos for the specified athlete
+ */
+export function getTestTypesForAthlete(athleteName: string): string[] {
+  return [...new Set(videoData.filter((video) => video.name === athleteName).map((video) => video.test))]
+}
+
+/**
+ * Check if videos exist for a specific test type and athlete combination
+ * @param testType The test type to check
+ * @param athleteName The athlete name to check
+ * @returns Boolean indicating if videos exist for this combination
+ */
+export function hasVideosForTestAndAthlete(testType: string, athleteName: string): boolean {
+  return videoData.some((video) => video.test === testType && video.name === athleteName)
+}
+
+/**
+ * Get video for a specific test type and athlete
+ * @param testType The test type to find
+ * @param athleteName The athlete name to find
+ * @returns VideoData object or undefined if not found
+ */
+export function getVideoForTestAndAthlete(testType: string, athleteName: string): VideoData | undefined {
+  return videoData.find((video) => video.test === testType && video.name === athleteName)
 }

@@ -1,10 +1,10 @@
 import { Zap, Activity, Brain } from "lucide-react"
-import Sprint10mRanking from "./sprint-10m-ranking"
-import Sprint20mRanking from "./sprint-20m-ranking"
-import GewandtheitRanking from "./gewandtheit-ranking"
-import DribblingRanking from "./dribbling-ranking"
-import BallkontrolleRanking from "./ballkontrolle-ranking"
-import BalljonglierenRanking from "./balljonglieren-ranking"
+import Sprint10mRanking from "@/components/performance/sprint-10m-ranking"
+import Sprint20mRanking from "@/components/performance/sprint-20m-ranking"
+import GewandtheitRanking from "@/components/performance/gewandtheit-ranking"
+import DribblingRanking from "@/components/performance/dribbling-ranking"
+import BallkontrolleRanking from "@/components/performance/ballkontrolle-ranking"
+import BalljonglierenRanking from "@/components/performance/balljonglieren-ranking"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Content() {

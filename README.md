@@ -1,30 +1,51 @@
-# coco
+# Finley Dashboard
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A modern sports analytics dashboard with theme switching.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/pauls-projects-8c683860/v0-coco)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/yQ2Kr6JmKjy)
+## Type System
 
-## Overview
+This project uses TypeScript with a dedicated types directory for shared type definitions:
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+\`\`\`
+types/
+├── index.ts        # Re-exports all types
+├── common.ts       # Common types used across the application
+├── dashboard.ts    # Dashboard-specific types
+├── layout.ts       # Layout component types
+├── performance.ts  # Performance data types
+├── tasks.ts        # Task-related types
+├── user.ts         # User-related types
+├── hooks.ts        # Hook-related types
+└── utils.ts        # Utility types
+\`\`\`
 
-## Deployment
+### Usage Guidelines
 
-Your project is live at:
+1. **Import Types**:
+   \`\`\`typescript
+   import type { PerformanceData } from '@/types/performance';
+   // Or using the barrel export
+   import type { PerformanceData } from '@/types';
+   \`\`\`
 
-**[https://vercel.com/pauls-projects-8c683860/v0-coco](https://vercel.com/pauls-projects-8c683860/v0-coco)**
+2. **Component Props**:
+   - Define component props as interfaces in the types directory
+   - Use these interfaces in your components
 
-## Build your app
+3. **Type Extensions**:
+   - Extend existing types using TypeScript's interface extension
+   - Example: `interface CustomPerformanceData extends PerformanceData { ... }`
 
-Continue building your app on:
+4. **Type Guards**:
+   - Use type guards for runtime type checking
+   - Example: `function isPerformanceData(data: unknown): data is PerformanceData { ... }`
 
-**[https://v0.dev/chat/projects/yQ2Kr6JmKjy](https://v0.dev/chat/projects/yQ2Kr6JmKjy)**
+## Adding New Types
 
-## How It Works
+1. Add your type to the appropriate file in the `types` directory
+2. If creating a new domain, add a new file and export from `index.ts`
+3. Use descriptive names and add JSDoc comments for complex types
+4. Consider reusing existing types through composition or extension
+\`\`\`
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+Let me know if you'd like me to continue with updating more components to use the new type system!
