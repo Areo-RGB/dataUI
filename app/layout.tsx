@@ -1,6 +1,7 @@
 import type React from "react"
 import { Inter } from "next/font/google"
 import "./globals.css"
+// Remove the direct import of video.js CSS - we'll load it dynamically
 import { ThemeProvider } from "@/components/theme/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
