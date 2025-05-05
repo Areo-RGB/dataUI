@@ -20,7 +20,7 @@ export interface ListItem {
 /**
  * Props for List03 component
  */
-export interface List03Props {
+export interface FinancialGoalListProps {
   items?: ListItem[]
   className?: string
 }

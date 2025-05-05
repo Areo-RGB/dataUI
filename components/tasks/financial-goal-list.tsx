@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Calendar, ArrowRight, CheckCircle2, Timer, AlertCircle, PiggyBank, TrendingUp, CreditCard } from "lucide-react"
 import React from "react"
-import type { ListItem, List03Props, IconStylesConfig, StatusConfigMap } from "@/types/tasks"
+import type { ListItem, FinancialGoalListProps, IconStylesConfig, StatusConfigMap } from "@/types/tasks"
 
 const iconStyles: IconStylesConfig = {
   savings: "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
@@ -63,7 +63,7 @@ const ITEMS: ListItem[] = [
   },
 ]
 
-export default function List03({ items = ITEMS, className }: List03Props) {
+export default function FinancialGoalList({ items = ITEMS, className }: FinancialGoalListProps) {
   return (
     <div className={cn("w-full", className)}>
       <div className="flex flex-col gap-3 p-1">

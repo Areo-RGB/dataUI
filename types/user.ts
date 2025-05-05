@@ -13,7 +13,7 @@ export interface MenuItem {
 /**
  * Profile component props
  */
-export interface ProfileProps {
+export interface UserProfileCardProps {
   name: string
   role: string
   avatar: string

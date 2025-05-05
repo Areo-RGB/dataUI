@@ -3,19 +3,19 @@ import { LogOut, MoveUpRight, Settings, CreditCard, FileText } from "lucide-reac
 import Image from "next/image"
 import Link from "next/link"
 
-interface MenuItem {
-  label: string
-  value?: string
-  href: string
-  icon?: React.ReactNode
-  external?: boolean
-}
-
-interface Profile01Props {
+interface UserProfileCardProps {
   name: string
   role: string
   avatar: string
   subscription?: string
+}
+
+interface MenuItem {
+  label: string
+  value?: string
+  href: string
+  icon: React.ReactNode
+  external?: boolean
 }
 
 const defaultProfile = {
@@ -23,14 +23,14 @@ const defaultProfile = {
   role: "Prompt Engineer",
   avatar: "https://ferf1mheo22r9ira.public.blob.vercel-storage.com/avatar-02-albo9B0tWOSLXCVZh9rX9KFxXIVWMr.png",
   subscription: "Free Trial",
-} satisfies Required<Profile01Props>
+} satisfies Required<UserProfileCardProps>
 
-export default function Profile01({
+export default function UserProfileCard({
   name = defaultProfile.name,
   role = defaultProfile.role,
   avatar = defaultProfile.avatar,
   subscription = defaultProfile.subscription,
-}: Partial<Profile01Props> = defaultProfile) {
+}: Partial<UserProfileCardProps> = defaultProfile) {
   const menuItems: MenuItem[] = [
     {
       label: "Subscription",
@@ -59,7 +59,7 @@ export default function Profile01({
           <div className="flex items-center gap-4 mb-8">
             <div className="relative shrink-0">
               <Image
-                src={avatar}
+                src={avatar || "/placeholder.svg"}
                 alt={name}
                 width={72}
                 height={72}

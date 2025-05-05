@@ -1,5 +1,5 @@
 import Layout from "@/components/layout/layout"
-import List03 from "@/components/tasks/list-03"
+import FinancialGoalList from "@/components/tasks/financial-goal-list"
 import { Calendar, CheckCircle2, Timer, AlertCircle } from "lucide-react"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
@@ -33,11 +33,11 @@ export default function Task() {
             </TabsList>
 
             <TabsContent value="all" className="mt-6 space-y-4">
-              <List03 />
+              <FinancialGoalList />
             </TabsContent>
 
             <TabsContent value="pending" className="mt-6 space-y-4">
-              <List03
+              <FinancialGoalList
                 items={[
                   {
                     id: "2",
@@ -55,7 +55,7 @@ export default function Task() {
             </TabsContent>
 
             <TabsContent value="in-progress" className="mt-6 space-y-4">
-              <List03
+              <FinancialGoalList
                 items={[
                   {
                     id: "1",

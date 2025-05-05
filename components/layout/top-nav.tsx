@@ -3,7 +3,7 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
 import { Bell, ChevronRight } from "lucide-react"
-import Profile01 from "@/components/user/profile-01"
+import UserProfileCard from "@/components/user/user-profile-card"
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme/theme-toggle"
 
@@ -63,7 +63,7 @@ export default function TopNav() {
             sideOffset={8}
             className="w-[280px] sm:w-80 bg-background border-border rounded-lg shadow-lg"
           >
-            <Profile01 avatar="https://ferf1mheo22r9ira.public.blob.vercel-storage.com/avatar-01-n0x8HFv8EUetf9z6ht0wScJKoTHqf8.png" />
+            <UserProfileCard avatar="https://ferf1mheo22r9ira.public.blob.vercel-storage.com/avatar-01-n0x8HFv8EUetf9z6ht0wScJKoTHqf8.png" />
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
