@@ -103,7 +103,7 @@ export const videoData: VideoData[] = [
     name: "Finley",
     test: "Gewandtheit",
     result: 7.81,
-    date: "2023-05-15",
+    date: "15-05-2023",
     description: "Technique analysis focusing on agility and movement patterns",
   },
   {
@@ -111,7 +111,7 @@ export const videoData: VideoData[] = [
     name: "Bent",
     test: "Gewandtheit",
     result: 8.14,
-    date: "2023-06-02",
+    date: "02-06-2023",
     description: "Follow-up assessment of agility performance",
   },
 
@@ -121,7 +121,7 @@ export const videoData: VideoData[] = [
     name: "Finley",
     test: "10m Sprint",
     result: 2.0,
-    date: "2023-05-10",
+    date: "10-05-2023",
     description: "10m sprint acceleration analysis",
   },
   {
@@ -129,7 +129,7 @@ export const videoData: VideoData[] = [
     name: "Alex",
     test: "10m Sprint",
     result: 2.16,
-    date: "2023-05-10",
+    date: "10-05-2023",
     description: "10m sprint technique assessment",
   },
 
@@ -139,7 +139,7 @@ export const videoData: VideoData[] = [
     name: "Finley",
     test: "Dribbling",
     result: 10.27,
-    date: "2023-04-28",
+    date: "28-04-2023",
     description: "Ball control and dribbling technique analysis",
   },
   {
@@ -147,7 +147,7 @@ export const videoData: VideoData[] = [
     name: "Bent",
     test: "Dribbling",
     result: 10.28,
-    date: "2023-04-28",
+    date: "28-04-2023",
     description: "Dribbling speed and precision assessment",
   },
 
@@ -157,7 +157,7 @@ export const videoData: VideoData[] = [
     name: "Finley",
     test: "Ballkontrolle",
     result: 10.82,
-    date: "2023-05-05",
+    date: "05-05-2023",
     description: "Ball control under pressure analysis",
   },
   {
@@ -165,7 +165,7 @@ export const videoData: VideoData[] = [
     name: "Bent",
     test: "Ballkontrolle",
     result: 8.95,
-    date: "2023-05-05",
+    date: "05-05-2023",
     description: "Technical ball handling assessment",
   },
 ]
@@ -422,4 +422,73 @@ export function hasVideosForTestAndAthlete(testType: string, athleteName: string
  */
 export function getVideoForTestAndAthlete(testType: string, athleteName: string): VideoData | undefined {
   return videoData.find((video) => video.test === testType && video.name === athleteName)
+}
+
+/**
+ * Get all available dates for videos
+ * @returns Array of unique dates that have videos
+ */
+export function getAvailableDates(): string[] {
+  return [...new Set(videoData.filter((video) => video.date).map((video) => video.date as string))].sort()
+}
+
+/**
+ * Get all available dates for a specific athlete and test type
+ * @param athleteName The athlete name to filter by
+ * @param testType The test type to filter by
+ * @returns Array of unique dates that have videos for the specified athlete and test
+ */
+export function getDatesForAthleteAndTest(athleteName: string, testType: string): string[] {
+  return [
+    ...new Set(
+      videoData
+        .filter((video) => video.name === athleteName && video.test === testType && video.date)
+        .map((video) => video.date as string),
+    ),
+  ].sort()
+}
+
+/**
+ * Get video by athlete, test type, and date
+ * @param athleteName The athlete name to find
+ * @param testType The test type to find
+ * @param date The date to find
+ * @returns VideoData object or undefined if not found
+ */
+export function getVideoByAthleteTestAndDate(
+  athleteName: string,
+  testType: string,
+  date?: string,
+): VideoData | undefined {
+  if (!date) {
+    return getVideoForTestAndAthlete(testType, athleteName)
+  }
+  return videoData.find((video) => video.name === athleteName && video.test === testType && video.date === date)
+}
+
+/**
+ * Format date for display
+ * @param dateString Date string in DD-MM-YYYY format
+ * @returns Formatted date string (e.g., "15 May 2023")
+ */
+export function formatDateForDisplay(dateString?: string): string {
+  if (!dateString) return "N/A"
+
+  const [day, month, year] = dateString.split("-")
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ]
+
+  return `${Number.parseInt(day)} ${months[Number.parseInt(month) - 1]} ${year}`
 }
