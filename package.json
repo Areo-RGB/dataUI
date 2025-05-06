@@ -59,8 +59,7 @@
     "vaul": "^0.9.6",
     "zod": "^3.24.1",
     "video.js": "latest",
-    "next-video": "latest",
-    "geist": "latest"
+    "next-video": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
