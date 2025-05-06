@@ -26,13 +26,13 @@ export default function VideosPage() {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-4 md:space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Videos</h1>
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-6 border border-gray-200 dark:border-[#1F1F23]">
+          <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-4 md:p-6 border border-gray-200 dark:border-[#1F1F23]">
             <div className="space-y-6">
               <h2 className="text-lg font-bold text-gray-900 dark:text-white">Training Session Analysis</h2>
 
@@ -73,7 +73,7 @@ export default function VideosPage() {
               {!isLoading && (
                 <div className="mt-4 space-y-4">
                   {/* Video Details */}
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col md:flex-row items-start gap-4">
                     <div className="flex-1">
                       <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
                         {selectedAthlete} - {selectedTestType} Test

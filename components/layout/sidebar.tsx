@@ -73,7 +73,7 @@ export default function Sidebar() {
                   Overview
                 </div>
                 <div className="space-y-1">
-                  <NavItem href="#" icon={Home}>
+                  <NavItem href="/dashboard" icon={Home}>
                     Dashboard
                   </NavItem>
                   <NavItem href="/task" icon={ClipboardList}>

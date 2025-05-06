@@ -422,7 +422,7 @@ export default function EnhancedVideoComparison({
 
         {/* Control Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             {/* Play/Pause */}
             <button
               onClick={togglePlay}
@@ -513,7 +513,7 @@ export default function EnhancedVideoComparison({
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
             {/* Annotations Toggle */}
             <button
               onClick={() => setShowAnnotations(!showAnnotations)}

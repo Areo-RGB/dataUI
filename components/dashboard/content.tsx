@@ -9,9 +9,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
 export default function Content() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <div className="grid grid-cols-1 gap-6">
-        <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-6 flex flex-col border border-gray-200 dark:border-[#1F1F23]">
+        <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-4 md:p-6 flex flex-col border border-gray-200 dark:border-[#1F1F23]">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4 text-left">Leistungsdiagnostik</h2>
 
           <Tabs defaultValue="schnelligkeit" className="w-full">

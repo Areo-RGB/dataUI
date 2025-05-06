@@ -19,7 +19,7 @@ export default function TopNav() {
   ]
 
   return (
-    <nav className="px-3 sm:px-6 flex items-center justify-between bg-white dark:bg-[#0F0F12] border-b border-gray-200 dark:border-[#1F1F23] h-full">
+    <nav className="px-3 sm:px-6 flex flex-wrap items-center justify-between gap-y-2 bg-white dark:bg-[#0F0F12] border-b border-gray-200 dark:border-[#1F1F23] min-h-16 py-2 md:h-full md:py-0">
       <div className="font-medium text-sm hidden sm:flex items-center space-x-1 truncate max-w-[300px]">
         {breadcrumbs.map((item, index) => (
           <div key={item.label} className="flex items-center">
