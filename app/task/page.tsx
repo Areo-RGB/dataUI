@@ -1,11 +1,11 @@
 import { Calendar, Timer, AlertCircle, CheckCircle2 } from "lucide-react"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import AppLayout from "@/components/layout"
+import Layout from "@/components/layout/layout"
 import FinancialGoalList from "@/components/tasks/financial-goal-list"
 
 export default function Task() {
   return (
-    <AppLayout>
+    <Layout>
       <div className="space-y-4 md:space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Tasks</h1>
@@ -89,6 +89,6 @@ export default function Task() {
           </Tabs>
         </div>
       </div>
-    </AppLayout>
+    </Layout>
   )
 }

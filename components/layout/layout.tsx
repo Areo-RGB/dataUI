@@ -1,12 +1,12 @@
 "use client"
 
-import Sidebar from "./sidebar"
-import TopNav from "./top-nav"
+import Sidebar from "@/components/layout/sidebar"
+import TopNav from "@/components/layout/top-nav"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 import type { LayoutProps } from "@/types/layout"
 
-export default function AppLayout({ children }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -25,7 +25,7 @@ export default function AppLayout({ children }: LayoutProps) {
         <header className="h-16 border-b border-gray-200 dark:border-[#1F1F23]">
           <TopNav />
         </header>
-        <main className="flex-1 overflow-auto p-4 md:p-6 bg-white dark:bg-[#0F0F12]">{children}</main>
+        <main className="flex-1 overflow-auto p-6 bg-white dark:bg-[#0F0F12]">{children}</main>
       </div>
     </div>
   )
