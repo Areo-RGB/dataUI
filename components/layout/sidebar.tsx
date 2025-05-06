@@ -2,9 +2,7 @@
 
 import type React from "react"
 import type { LucideIcon } from "lucide-react"
-import { Home, Menu, ClipboardList, Film, BarChart2 } from "lucide-react"
-import { ThemeToggle } from "@/components/theme/theme-toggle"
-
+import { Home, Menu, ClipboardList, Film, BarChart2, Moon } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import Image from "next/image"
@@ -93,15 +91,13 @@ export default function Sidebar() {
             </div>
           </div>
 
-          {/* Add the theme toggle at the bottom */}
+          {/* Dark mode indicator */}
           <div className="px-4 py-3 border-t border-gray-200 dark:border-[#1F1F23]">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Theme</span>
-              <ThemeToggle />
+            <div className="flex items-center">
+              <Moon className="h-4 w-4 mr-2 text-gray-600 dark:text-gray-300" />
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Dark Mode</span>
             </div>
           </div>
-
-          {/* Bottom navigation hidden */}
         </div>
       </nav>
 

@@ -1,12 +1,9 @@
 import type React from "react"
 import { Inter } from "next/font/google"
 import "./globals.css"
-// Remove the direct import of video.js CSS - we'll load it dynamically
-import { ThemeProvider } from "@/components/theme/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
-// Update the metadata title
 export const metadata = {
   title: "Finley Dashboard",
   description: "A modern sports analytics dashboard with theme switching",
@@ -22,12 +19,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en" className="dark">
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
