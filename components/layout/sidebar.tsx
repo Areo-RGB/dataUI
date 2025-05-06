@@ -3,6 +3,7 @@
 import type React from "react"
 import type { LucideIcon } from "lucide-react"
 import { Home, Menu, ClipboardList, Film, BarChart2 } from "lucide-react"
+import { ThemeToggle } from "@/components/theme/theme-toggle"
 
 import Link from "next/link"
 import { useState } from "react"
@@ -89,6 +90,14 @@ export default function Sidebar() {
                   </NavItem>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Add the theme toggle at the bottom */}
+          <div className="px-4 py-3 border-t border-gray-200 dark:border-[#1F1F23]">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Theme</span>
+              <ThemeToggle />
             </div>
           </div>
 
