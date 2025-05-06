@@ -15,6 +15,22 @@ import {
 import VideoJsPlayer from "@/components/videos/VideoJsPlayer"
 
 /**
+ * Helper function to convert a background color class to a border color class
+ * @param bgColorClass The background color class (e.g., "bg-red-600/60")
+ * @returns The corresponding border color class (e.g., "border-red-600/60")
+ */
+function getBorderColorFromBg(bgColorClass: string): string {
+  // Extract just the color part from the background class
+  // This assumes the format is "bg-{color}" or "bg-{color}/60"
+  const colorMatch = bgColorClass.match(/bg-([a-z]+-[0-9]+(?:\/[0-9]+)?)/)
+  if (colorMatch && colorMatch[1]) {
+    return `border-${colorMatch[1]}`
+  }
+  // Fallback to a default border color if the pattern doesn't match
+  return "border-chart-2"
+}
+
+/**
  * PerformanceRanking component displays a ranking of performance data
  * and provides video playback functionality for associated videos.
  */
@@ -146,6 +162,8 @@ export default function PerformanceRanking({
 
             // Get gradient colors (now more muted)
             const indicatorColor = getGradientColor(percentile)
+            // Convert the background color to a border color
+            const borderColor = !isBenchmark ? getBorderColorFromBg(indicatorColor) : "border-muted-foreground/40"
             const textColor = getGradientTextColor(percentile)
 
             return (
@@ -171,9 +189,8 @@ export default function PerformanceRanking({
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
                     "border-2",
-                    isBenchmark
-                      ? "border-muted-foreground/40 bg-muted/50 text-muted-foreground"
-                      : "border-chart-2 bg-muted text-card-foreground",
+                    borderColor,
+                    isBenchmark ? "bg-muted/50 text-muted-foreground" : "bg-muted text-card-foreground",
                     "text-sm font-semibold",
                   )}
                 >
