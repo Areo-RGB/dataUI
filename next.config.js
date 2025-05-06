@@ -11,6 +11,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  transpilePackages: ["geist"],
   // Your existing Next.js config
 }
 

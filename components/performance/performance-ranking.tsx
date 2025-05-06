@@ -159,19 +159,22 @@ export default function PerformanceRanking({
                   "relative", // Added for absolute positioning of category indicator
                 )}
               >
-                {/* Gradient Indicator with muted colors */}
-                <div
-                  className={`absolute left-0 top-0 bottom-0 w-1 ${indicatorColor} rounded-l-lg`}
-                  title={`${percentile}% - ${category}`}
-                ></div>
+                {/* Gradient Indicator with muted colors - only for player entries */}
+                {!isBenchmark && (
+                  <div
+                    className={`absolute left-0 top-0 bottom-0 w-1 ${indicatorColor} rounded-l-lg`}
+                    title={`${percentile}% - ${category}`}
+                  ></div>
+                )}
 
                 <div
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
                     "border-2",
-                    isBenchmark ? "border-muted-foreground" : "border-chart-2",
+                    isBenchmark
+                      ? "border-muted-foreground/40 bg-muted/50 text-muted-foreground"
+                      : "border-chart-2 bg-muted text-card-foreground",
                     "text-sm font-semibold",
-                    "bg-muted text-card-foreground",
                   )}
                 >
                   {index + 1}
