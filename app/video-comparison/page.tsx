@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Layout from "@/components/layout/layout"
+import AppLayout from "@/components/layout"
 import VideoPlayer from "@/components/videos/video-player" // Existing player
 import NextVideoPlayer from "@/components/videos/next-video-player" // New next-video player
 
@@ -15,7 +15,7 @@ export default function VideoComparisonPage() {
   const videoUrl = "https://data3.fra1.cdn.digitaloceanspaces.com/sprint1.webm"
 
   return (
-    <Layout>
+    <AppLayout>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Video Player Comparison</h1>
@@ -93,6 +93,6 @@ export default function VideoComparisonPage() {
           </div>
         </div>
       </div>
-    </Layout>
+    </AppLayout>
   )
 }

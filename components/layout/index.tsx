@@ -6,7 +6,7 @@ import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 import type { LayoutProps } from "@/types/layout"
 
-export default function Layout({ children }: LayoutProps) {
+export default function AppLayout({ children }: LayoutProps) {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
 

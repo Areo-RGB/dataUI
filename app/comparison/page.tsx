@@ -1,9 +1,9 @@
-import Layout from "@/components/layout/layout"
+import AppLayout from "@/components/layout"
 import ComparisonView from "@/components/comparison/comparison-view"
 
 export default function ComparisonPage() {
   return (
-    <Layout>
+    <AppLayout>
       <div className="space-y-4 md:space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Vergleich</h1>
@@ -18,6 +18,6 @@ export default function ComparisonPage() {
           </div>
         </div>
       </div>
-    </Layout>
+    </AppLayout>
   )
 }
