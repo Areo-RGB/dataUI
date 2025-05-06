@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react"
 import { cn } from "@/lib/utils"
-import { ChevronDown, ChevronUp, Film } from "lucide-react"
+import { Film } from "lucide-react"
 import type { PerformanceRankingProps } from "@/types/performance"
 import type { ButtonVideoMapping } from "@/types/videos"
 import {
@@ -28,7 +28,7 @@ export default function PerformanceRanking({
 }: PerformanceRankingProps) {
   const [isPlayingVideo, setIsPlayingVideo] = useState(false)
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string | undefined>(undefined)
-  const [showPlayerResults, setShowPlayerResults] = useState(false)
+  const [showCategoryLegend, setShowCategoryLegend] = useState(false)
 
   // Get video mappings for this exercise using the title prop as the key
   // This is memoized to prevent unnecessary recalculations
@@ -63,8 +63,21 @@ export default function PerformanceRanking({
     return sortAscending ? aResult - bResult : bResult - aResult
   })
 
-  // Get only player data (non-benchmark)
-  const playerData = sortedData.filter((item) => !item.name.startsWith("DFB"))
+  // Generate gradient legend items with muted colors
+  const gradientLegendItems = [
+    { percentile: "0-3%", color: "bg-red-800/60" },
+    { percentile: "3-10%", color: "bg-red-700/60" },
+    { percentile: "10-20%", color: "bg-red-600/60" },
+    { percentile: "20-30%", color: "bg-red-500/60" },
+    { percentile: "30-40%", color: "bg-orange-600/60" },
+    { percentile: "40-50%", color: "bg-orange-500/60" },
+    { percentile: "50-60%", color: "bg-orange-400/60" },
+    { percentile: "60-70%", color: "bg-yellow-500/60" },
+    { percentile: "70-80%", color: "bg-yellow-400/60" },
+    { percentile: "80-90%", color: "bg-green-400/60" },
+    { percentile: "90-97%", color: "bg-green-500/60" },
+    { percentile: ">97%", color: "bg-green-600/60" },
+  ]
 
   return (
     <div
@@ -96,54 +109,38 @@ export default function PerformanceRanking({
           <div className="flex flex-wrap items-center gap-2 gap-y-1">
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full border-2 border-zinc-400 dark:border-zinc-600"></div>
-              <span className="text-xs text-zinc-600 dark:text-zinc-400">DFB</span>
+              <span className="text-xs text-zinc-600 dark:text-zinc-400">Benchmark</span>
             </div>
-            <div className="relative">
-              <button
-                onClick={() => setShowPlayerResults(!showPlayerResults)}
-                className="flex items-center gap-1 text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
-              >
-                <div className="w-3 h-3 rounded-full border-2 border-zinc-400 dark:border-zinc-600"></div>
-                <span>Player</span>
-                {showPlayerResults ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
-              </button>
-
-              {/* Player Results Panel - Now positioned below the Player legend item */}
-              {showPlayerResults && playerData.length > 0 && (
-                <div className="absolute right-0 top-full mt-1 z-10 w-64 p-2 bg-white dark:bg-zinc-800 rounded-lg text-xs shadow-md border border-zinc-100 dark:border-zinc-700">
-                  <div className="font-medium mb-1 text-zinc-700 dark:text-zinc-300">Spielerergebnisse:</div>
-                  <div className="grid grid-cols-1 gap-1 max-h-48 overflow-y-auto">
-                    {playerData.map((player) => {
-                      const percentile = estimatePlayerPercentile(player.ergebnis, title)
-                      const category = getPerformanceCategory(percentile)
-                      const indicatorColor = getGradientColor(percentile)
-                      const textColor = getGradientTextColor(percentile)
-
-                      return (
-                        <div key={player.name} className="flex items-center justify-between">
-                          <div className="flex items-center gap-1.5">
-                            <div className={`w-1.5 h-4 rounded-sm ${indicatorColor}`}></div>
-                            <span className="font-medium">{player.name}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className={textColor}>
-                              {player.ergebnis}
-                              {unit}
-                            </span>
-                            <span className="text-zinc-400">|</span>
-                            <span className={textColor}>P{percentile}</span>
-                            <span className="text-zinc-400">|</span>
-                            <span className={textColor}>{category}</span>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
+            <div className="flex items-center gap-1">
+              <div className="w-3 h-3 rounded-full border-2 border-blue-500 dark:border-blue-500"></div>
+              <span className="text-xs text-zinc-600 dark:text-zinc-400">Player</span>
             </div>
+            <button
+              onClick={() => setShowCategoryLegend(!showCategoryLegend)}
+              className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"
+            >
+              {showCategoryLegend ? "Hide" : "Show"} Gradient
+            </button>
           </div>
         </div>
+
+        {/* Gradient Legend with muted colors */}
+        {showCategoryLegend && (
+          <div className="mb-3 p-2 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg text-xs">
+            <div className="font-medium mb-1 text-zinc-700 dark:text-zinc-300">Performance Gradient:</div>
+            <div className="flex items-center mb-2">
+              <div className="h-4 flex-1 bg-gradient-to-r from-red-800/60 via-orange-500/60 to-green-600/60 rounded-sm"></div>
+            </div>
+            <div className="grid grid-cols-3 gap-x-2 gap-y-1">
+              {gradientLegendItems.map((item) => (
+                <div key={item.percentile} className="flex items-center gap-2">
+                  <div className={`w-2 h-4 rounded-sm ${item.color}`}></div>
+                  <span className="text-zinc-600 dark:text-zinc-400">{item.percentile}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="space-y-1">
           {sortedData.map((item, index) => {
@@ -170,16 +167,17 @@ export default function PerformanceRanking({
                   "relative", // Added for absolute positioning of category indicator
                 )}
               >
-                {/* Gradient Indicator with muted colors - reduced width */}
+                {/* Gradient Indicator with muted colors */}
                 <div
-                  className={`absolute left-0 top-0 bottom-0 w-0.5 ${indicatorColor} rounded-l-lg`}
+                  className={`absolute left-0 top-0 bottom-0 w-1 ${indicatorColor} rounded-l-lg`}
                   title={`${percentile}% - ${category}`}
                 ></div>
 
                 <div
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
-                    "border-2 border-zinc-400 dark:border-zinc-600",
+                    "border-2",
+                    isBenchmark ? "border-zinc-400 dark:border-zinc-600" : "border-blue-500 dark:border-blue-500",
                     "text-sm font-semibold",
                     "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300",
                   )}
@@ -201,7 +199,7 @@ export default function PerformanceRanking({
                       )}
                     </h3>
                     <p className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                      {isBenchmark ? "DFB" : item.kategorie}
+                      {isBenchmark ? "DFB Benchmark" : item.kategorie}
                     </p>
                   </div>
 
