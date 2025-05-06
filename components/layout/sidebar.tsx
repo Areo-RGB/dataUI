@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import type { LucideIcon } from "lucide-react"
 import { Home, Menu, ClipboardList, Film, BarChart2 } from "lucide-react"
 
 import Link from "next/link"
@@ -21,7 +21,7 @@ export default function Sidebar() {
     children,
   }: {
     href: string
-    icon: any
+    icon: LucideIcon
     children: React.ReactNode
   }) {
     return (
@@ -55,13 +55,15 @@ export default function Sidebar() {
         <div className="h-full flex flex-col">
           <div className="h-16 px-6 flex items-center border-b border-gray-200 dark:border-[#1F1F23]">
             <div className="flex items-center gap-3">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/10033-jR3tFDqOJWyEt8gIXb69i6DKZk5mWM.png"
-                alt="Finley Logo"
-                width={32}
-                height={32}
-                className="flex-shrink-0"
-              />
+              <Link href="/" className="flex-shrink-0">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/10033-jR3tFDqOJWyEt8gIXb69i6DKZk5mWM.png"
+                  alt="Finley Logo"
+                  width={32}
+                  height={32}
+                  className="flex-shrink-0"
+                />
+              </Link>
               <span className="text-lg font-semibold text-gray-900 dark:text-white">Finley</span>
             </div>
           </div>

@@ -63,20 +63,13 @@ export default function PerformanceRanking({
     return sortAscending ? aResult - bResult : bResult - aResult
   })
 
-  // Generate gradient legend items with muted colors
+  // Generate gradient legend items with performance categories from the reference table
   const gradientLegendItems = [
-    { percentile: "0-3%", color: "bg-red-800/60" },
-    { percentile: "3-10%", color: "bg-red-700/60" },
-    { percentile: "10-20%", color: "bg-red-600/60" },
-    { percentile: "20-30%", color: "bg-red-500/60" },
-    { percentile: "30-40%", color: "bg-orange-600/60" },
-    { percentile: "40-50%", color: "bg-orange-500/60" },
-    { percentile: "50-60%", color: "bg-orange-400/60" },
-    { percentile: "60-70%", color: "bg-yellow-500/60" },
-    { percentile: "70-80%", color: "bg-yellow-400/60" },
-    { percentile: "80-90%", color: "bg-green-400/60" },
-    { percentile: "90-97%", color: "bg-green-500/60" },
-    { percentile: ">97%", color: "bg-green-600/60" },
+    { category: "unterdurchschnittlich", color: "bg-red-600/60", percentileRange: "3-30%" },
+    { category: "durchschnittlich", color: "bg-orange-500/60", percentileRange: "31-70%" },
+    { category: "gut", color: "bg-yellow-500/60", percentileRange: "71-80%" },
+    { category: "sehr gut", color: "bg-green-500/60", percentileRange: "81-90%" },
+    { category: "ausgezeichnet", color: "bg-green-600/60", percentileRange: "91-97%" },
   ]
 
   return (
@@ -124,18 +117,18 @@ export default function PerformanceRanking({
           </div>
         </div>
 
-        {/* Gradient Legend with muted colors */}
+        {/* Gradient Legend with performance categories */}
         {showCategoryLegend && (
           <div className="mb-3 p-2 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg text-xs">
-            <div className="font-medium mb-1 text-zinc-700 dark:text-zinc-300">Performance Gradient:</div>
+            <div className="font-medium mb-1 text-zinc-700 dark:text-zinc-300">Leistungskategorien:</div>
             <div className="flex items-center mb-2">
-              <div className="h-4 flex-1 bg-gradient-to-r from-red-800/60 via-orange-500/60 to-green-600/60 rounded-sm"></div>
+              <div className="h-4 flex-1 bg-gradient-to-r from-red-600/60 via-orange-500/60 to-green-600/60 rounded-sm"></div>
             </div>
-            <div className="grid grid-cols-3 gap-x-2 gap-y-1">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-1">
               {gradientLegendItems.map((item) => (
-                <div key={item.percentile} className="flex items-center gap-2">
+                <div key={item.category} className="flex items-center gap-2">
                   <div className={`w-2 h-4 rounded-sm ${item.color}`}></div>
-                  <span className="text-zinc-600 dark:text-zinc-400">{item.percentile}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">{item.category}</span>
                 </div>
               ))}
             </div>

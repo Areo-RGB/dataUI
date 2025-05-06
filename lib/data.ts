@@ -1,16 +1,6 @@
 import type { PerformanceData, PerformanceDifference, PerformanceComparison } from "@/types/performance"
 import type { VideoData, MetricData, ButtonVideoMapping } from "@/types/videos"
 
-// Add this new interface at the top of the file with the other type definitions
-// export interface VideoData {
-//   url: string
-//   name: string
-//   test: string
-//   result: number | string
-//   date?: string
-//   description?: string
-// }
-
 export const performanceData: PerformanceData[] = [
   { kategorie: "Schnelligkeit", uebung: "10m Sprint", name: "DFB-3", ergebnis: 2.39 },
   { kategorie: "Schnelligkeit", uebung: "10m Sprint", name: "DFB-10", ergebnis: 2.33 },
