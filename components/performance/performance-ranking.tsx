@@ -103,7 +103,7 @@ export default function PerformanceRanking({
                 onClick={() => setShowPlayerResults(!showPlayerResults)}
                 className="flex items-center gap-1 text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
               >
-                <div className="w-3 h-3 rounded-full border-2 border-blue-500 dark:border-blue-500"></div>
+                <div className="w-3 h-3 rounded-full border-2 border-zinc-400 dark:border-zinc-600"></div>
                 <span>Player</span>
                 {showPlayerResults ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
               </button>
@@ -180,7 +180,7 @@ export default function PerformanceRanking({
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
                     "border-2",
-                    isBenchmark ? "border-zinc-400 dark:border-zinc-600" : "border-blue-500 dark:border-blue-500",
+                    "border-zinc-400 dark:border-zinc-600",
                     "text-sm font-semibold",
                     "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300",
                   )}
