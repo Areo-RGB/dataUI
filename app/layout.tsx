@@ -1,12 +1,11 @@
 import type React from "react"
-import { Inter } from "next/font/google"
 import "./globals.css"
-
-const inter = Inter({ subsets: ["latin"] })
+import { cn } from "@/lib/utils"
+import { geistSans, geistMono, serif } from "@/lib/fonts"
 
 export const metadata = {
   title: "Finley Dashboard",
-  description: "A modern sports analytics dashboard with theme switching",
+  description: "A modern sports analytics dashboard",
   icons: {
     icon: "/favicon.ico",
   },
@@ -19,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={cn(geistSans.variable, geistMono.variable, serif.variable)}>
+      <body className={cn("bg-background text-foreground font-sans")}>{children}</body>
     </html>
   )
 }

@@ -4,26 +4,26 @@ import React from "react"
 import type { ListItem, FinancialGoalListProps, IconStylesConfig, StatusConfigMap } from "@/types/tasks"
 
 const iconStyles: IconStylesConfig = {
-  savings: "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
-  investment: "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
-  debt: "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
+  savings: "bg-muted text-foreground",
+  investment: "bg-muted text-foreground",
+  debt: "bg-muted text-foreground",
 }
 
 const statusConfig: StatusConfigMap = {
   pending: {
     icon: Timer,
-    class: "text-amber-600 dark:text-amber-400",
-    bg: "bg-amber-100 dark:bg-amber-900/30",
+    class: "text-chart-1",
+    bg: "bg-chart-1/10",
   },
   "in-progress": {
     icon: AlertCircle,
-    class: "text-blue-600 dark:text-blue-400",
-    bg: "bg-blue-100 dark:bg-blue-900/30",
+    class: "text-chart-2",
+    bg: "bg-chart-2/10",
   },
   completed: {
     icon: CheckCircle2,
-    class: "text-emerald-600 dark:text-emerald-400",
-    bg: "bg-emerald-100 dark:bg-emerald-900/30",
+    class: "text-emerald-500",
+    bg: "bg-emerald-500/10",
   },
 }
 
@@ -73,10 +73,10 @@ export default function FinancialGoalList({ items = ITEMS, className }: Financia
             className={cn(
               "flex flex-col",
               "w-full", // Changed from w-[280px] shrink-0 to w-full
-              "bg-white dark:bg-zinc-900/70",
+              "bg-card",
               "rounded-xl",
-              "border border-zinc-100 dark:border-zinc-800",
-              "hover:border-zinc-200 dark:hover:border-zinc-700",
+              "border border-border",
+              "hover:border-border/80",
               "transition-all duration-200",
               "shadow-sm backdrop-blur-xl",
             )}
@@ -99,19 +99,26 @@ export default function FinancialGoalList({ items = ITEMS, className }: Financia
               </div>
 
               <div>
-                <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">{item.title}</h3>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2">{item.subtitle}</p>
+                <h3 className="text-sm font-medium text-card-foreground mb-1">{item.title}</h3>
+                <p className="text-xs text-muted-foreground line-clamp-2">{item.subtitle}</p>
               </div>
 
               {typeof item.progress === "number" && (
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-zinc-600 dark:text-zinc-400">Progress</span>
-                    <span className="text-zinc-900 dark:text-zinc-100">{item.progress}%</span>
+                    <span className="text-muted-foreground">Progress</span>
+                    <span className="text-card-foreground">{item.progress}%</span>
                   </div>
-                  <div className="h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                  <div className="h-1.5 bg-muted rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-zinc-900 dark:bg-zinc-100 rounded-full"
+                      className={cn(
+                        "h-full rounded-full",
+                        item.status === "pending"
+                          ? "bg-chart-1"
+                          : item.status === "in-progress"
+                            ? "bg-chart-2"
+                            : "bg-emerald-500",
+                      )}
                       style={{ width: `${item.progress}%` }}
                     />
                   </div>
@@ -120,26 +127,26 @@ export default function FinancialGoalList({ items = ITEMS, className }: Financia
 
               {item.amount && (
                 <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{item.amount}</span>
-                  <span className="text-xs text-zinc-600 dark:text-zinc-400">target</span>
+                  <span className="text-sm font-medium text-card-foreground">{item.amount}</span>
+                  <span className="text-xs text-muted-foreground">target</span>
                 </div>
               )}
 
-              <div className="flex items-center text-xs text-zinc-600 dark:text-zinc-400">
+              <div className="flex items-center text-xs text-muted-foreground">
                 <Calendar className="w-3.5 h-3.5 mr-1.5" />
                 <span>{item.date}</span>
               </div>
             </div>
 
-            <div className="mt-auto border-t border-zinc-100 dark:border-zinc-800">
+            <div className="mt-auto border-t border-border">
               <button
                 className={cn(
                   "w-full flex items-center justify-center gap-2",
                   "py-2.5 px-3",
                   "text-xs font-medium",
-                  "text-zinc-600 dark:text-zinc-400",
-                  "hover:text-zinc-900 dark:hover:text-zinc-100",
-                  "hover:bg-zinc-100 dark:hover:bg-zinc-800/50",
+                  "text-muted-foreground",
+                  "hover:text-foreground",
+                  "hover:bg-muted/80",
                   "transition-colors duration-200",
                 )}
               >

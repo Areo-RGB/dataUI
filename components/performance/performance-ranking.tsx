@@ -76,9 +76,8 @@ export default function PerformanceRanking({
     <div
       className={cn(
         "w-full max-w-xl mx-auto",
-        "bg-white dark:bg-zinc-900/70",
-        "border border-zinc-100 dark:border-zinc-800",
-        "rounded-xl shadow-sm backdrop-blur-xl",
+        "bg-card rounded-xl border border-border",
+        "shadow-md",
         "relative",
         className,
       )}
@@ -98,19 +97,19 @@ export default function PerformanceRanking({
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           {/* Use displayTitle if available, otherwise fall back to title */}
-          <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{displayTitle || title}</h2>
+          <h2 className="text-sm font-semibold text-card-foreground">{displayTitle || title}</h2>
           <div className="flex flex-wrap items-center gap-2 gap-y-1">
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 rounded-full border-2 border-zinc-400 dark:border-zinc-600"></div>
-              <span className="text-xs text-zinc-600 dark:text-zinc-400">Benchmark</span>
+              <div className="w-3 h-3 rounded-full border-2 border-muted-foreground"></div>
+              <span className="text-xs text-muted-foreground">Benchmark</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 rounded-full border-2 border-blue-500 dark:border-blue-500"></div>
-              <span className="text-xs text-zinc-600 dark:text-zinc-400">Player</span>
+              <div className="w-3 h-3 rounded-full border-2 border-chart-2"></div>
+              <span className="text-xs text-muted-foreground">Player</span>
             </div>
             <button
               onClick={() => setShowCategoryLegend(!showCategoryLegend)}
-              className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"
+              className="text-xs text-muted-foreground hover:text-foreground"
             >
               {showCategoryLegend ? "Hide" : "Show"} Gradient
             </button>
@@ -119,8 +118,8 @@ export default function PerformanceRanking({
 
         {/* Gradient Legend with performance categories */}
         {showCategoryLegend && (
-          <div className="mb-3 p-2 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg text-xs">
-            <div className="font-medium mb-1 text-zinc-700 dark:text-zinc-300">Leistungskategorien:</div>
+          <div className="mb-3 p-2 bg-muted rounded-lg text-xs">
+            <div className="font-medium mb-1 text-card-foreground">Leistungskategorien:</div>
             <div className="flex items-center mb-2">
               <div className="h-4 flex-1 bg-gradient-to-r from-red-600/60 via-orange-500/60 to-green-600/60 rounded-sm"></div>
             </div>
@@ -128,7 +127,7 @@ export default function PerformanceRanking({
               {gradientLegendItems.map((item) => (
                 <div key={item.category} className="flex items-center gap-2">
                   <div className={`w-2 h-4 rounded-sm ${item.color}`}></div>
-                  <span className="text-zinc-600 dark:text-zinc-400">{item.category}</span>
+                  <span className="text-muted-foreground">{item.category}</span>
                 </div>
               ))}
             </div>
@@ -155,7 +154,7 @@ export default function PerformanceRanking({
                 className={cn(
                   "group flex items-center gap-3",
                   "p-2 rounded-lg",
-                  "hover:bg-zinc-100 dark:hover:bg-zinc-800/50",
+                  "hover:bg-muted/50",
                   "transition-all duration-200",
                   "relative", // Added for absolute positioning of category indicator
                 )}
@@ -170,9 +169,9 @@ export default function PerformanceRanking({
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
                     "border-2",
-                    isBenchmark ? "border-zinc-400 dark:border-zinc-600" : "border-blue-500 dark:border-blue-500",
+                    isBenchmark ? "border-muted-foreground" : "border-chart-2",
                     "text-sm font-semibold",
-                    "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300",
+                    "bg-muted text-card-foreground",
                   )}
                 >
                   {index + 1}
@@ -180,10 +179,10 @@ export default function PerformanceRanking({
 
                 <div className="flex-1 flex items-center justify-between min-w-0">
                   <div className="space-y-0.5">
-                    <h3 className="text-xs font-medium text-zinc-900 dark:text-zinc-100">
+                    <h3 className="text-xs font-medium text-card-foreground">
                       {item.name}
                       {isBenchmark && percentile && (
-                        <span className="ml-1 text-[10px] text-zinc-500 dark:text-zinc-400">(P{percentile})</span>
+                        <span className="ml-1 text-[10px] text-muted-foreground">(P{percentile})</span>
                       )}
                       {!isBenchmark && percentile && (
                         <span className={`ml-1 text-[10px] ${textColor}`}>
@@ -191,15 +190,13 @@ export default function PerformanceRanking({
                         </span>
                       )}
                     </h3>
-                    <p className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                    <p className="text-[11px] text-muted-foreground">
                       {isBenchmark ? "DFB Benchmark" : item.kategorie}
                     </p>
                   </div>
 
                   <div className="flex items-center gap-1.5 pl-3">
-                    <span
-                      className={`text-xs font-medium ${!isBenchmark ? textColor : "text-zinc-900 dark:text-zinc-100"}`}
-                    >
+                    <span className={`text-xs font-medium ${!isBenchmark ? textColor : "text-card-foreground"}`}>
                       {item.ergebnis}
                       {unit}
                     </span>
@@ -212,7 +209,7 @@ export default function PerformanceRanking({
       </div>
 
       {/* Video buttons section - dynamically generated based on available mappings */}
-      <div className="p-2 border-t border-zinc-100 dark:border-zinc-800">
+      <div className="p-2 border-t border-border">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           {videoMappings.map((mapping) => {
             const hasVideo = !!mapping.videoUrl
@@ -229,8 +226,8 @@ export default function PerformanceRanking({
                   "text-xs font-medium",
                   "rounded-md px-2 py-1.5",
                   hasVideo
-                    ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700"
-                    : "bg-zinc-100/50 text-zinc-400 dark:bg-zinc-800/50 dark:text-zinc-500 cursor-not-allowed",
+                    ? "bg-muted text-card-foreground hover:bg-muted/80"
+                    : "bg-muted/50 text-muted-foreground cursor-not-allowed",
                 )}
                 onClick={() => hasVideo && handlePlayVideo(mapping.videoUrl)} // Pass URL directly
                 disabled={!hasVideo}
@@ -244,7 +241,7 @@ export default function PerformanceRanking({
           {Array.from({ length: Math.max(0, 3 - videoMappings.length) }).map((_, index) => (
             <div
               key={`placeholder-${index}`}
-              className="w-full h-[31px] rounded-md bg-zinc-100/30 dark:bg-zinc-800/30"
+              className="w-full h-[31px] rounded-md bg-muted/30"
               aria-hidden="true"
             ></div>
           ))}

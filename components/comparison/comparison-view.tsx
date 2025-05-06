@@ -56,14 +56,14 @@ export default function ComparisonView() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Test Type Selector */}
         <div>
-          <label htmlFor="test-type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="test-type" className="block text-sm font-medium text-foreground mb-2">
             Select Test Type
           </label>
           <select
             id="test-type"
             value={selectedTestType}
             onChange={(e) => setSelectedTestType(e.target.value)}
-            className="block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900 py-2 px-3 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-amber-500 text-sm"
+            className="block w-full rounded-md border border-input bg-background py-2 px-3 shadow-sm focus:border-primary focus:outline-none focus:ring-primary text-sm"
           >
             {allTestTypes.map((testType) => (
               <option key={testType} value={testType}>
@@ -75,14 +75,14 @@ export default function ComparisonView() {
 
         {/* Left Athlete Selector */}
         <div>
-          <label htmlFor="left-athlete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="left-athlete" className="block text-sm font-medium text-foreground mb-2">
             Left Athlete
           </label>
           <select
             id="left-athlete"
             value={leftAthlete}
             onChange={(e) => setLeftAthlete(e.target.value)}
-            className="block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900 py-2 px-3 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-amber-500 text-sm"
+            className="block w-full rounded-md border border-input bg-background py-2 px-3 shadow-sm focus:border-primary focus:outline-none focus:ring-primary text-sm"
           >
             {allAthletes
               .filter((athlete) => getVideoForTestAndAthlete(selectedTestType, athlete) !== undefined)
@@ -96,14 +96,14 @@ export default function ComparisonView() {
 
         {/* Right Athlete Selector */}
         <div>
-          <label htmlFor="right-athlete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="right-athlete" className="block text-sm font-medium text-foreground mb-2">
             Right Athlete
           </label>
           <select
             id="right-athlete"
             value={rightAthlete}
             onChange={(e) => setRightAthlete(e.target.value)}
-            className="block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900 py-2 px-3 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-amber-500 text-sm"
+            className="block w-full rounded-md border border-input bg-background py-2 px-3 shadow-sm focus:border-primary focus:outline-none focus:ring-primary text-sm"
           >
             {allAthletes
               .filter((athlete) => getVideoForTestAndAthlete(selectedTestType, athlete) !== undefined)
@@ -133,8 +133,8 @@ export default function ComparisonView() {
             initialSyncState={true}
           />
         ) : (
-          <div className="aspect-video flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-            <p className="text-zinc-500 dark:text-zinc-400">
+          <div className="aspect-video flex items-center justify-center bg-muted rounded-xl">
+            <p className="text-muted-foreground">
               {!selectedTestType ? "Please select a test type" : "No videos available for this selection"}
             </p>
           </div>
@@ -144,43 +144,43 @@ export default function ComparisonView() {
       {/* Performance Data Comparison */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {/* Left Athlete Performance */}
-        <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-4">
-          <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{leftAthlete} Performance</h3>
+        <div className="bg-card/50 rounded-lg p-4">
+          <h3 className="text-base font-semibold text-card-foreground mb-3">{leftAthlete} Performance</h3>
           <div className="space-y-2">
             {leftPerformanceData
               .filter((data) => data.name === leftAthlete)
               .map((data, index) => (
                 <div key={index} className="flex items-center justify-between">
-                  <span className="text-sm text-zinc-700 dark:text-zinc-300">{data.uebung}:</span>
-                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                  <span className="text-sm text-muted-foreground">{data.uebung}:</span>
+                  <span className="text-sm font-medium text-card-foreground">
                     {data.ergebnis}
                     {data.uebung.includes("Sprint") ? "s" : ""}
                   </span>
                 </div>
               ))}
             {leftPerformanceData.filter((data) => data.name === leftAthlete).length === 0 && (
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">No performance data available</p>
+              <p className="text-sm text-muted-foreground">No performance data available</p>
             )}
           </div>
         </div>
 
         {/* Right Athlete Performance */}
-        <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-4">
-          <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{rightAthlete} Performance</h3>
+        <div className="bg-card/50 rounded-lg p-4">
+          <h3 className="text-base font-semibold text-card-foreground mb-3">{rightAthlete} Performance</h3>
           <div className="space-y-2">
             {rightPerformanceData
               .filter((data) => data.name === rightAthlete)
               .map((data, index) => (
                 <div key={index} className="flex items-center justify-between">
-                  <span className="text-sm text-zinc-700 dark:text-zinc-300">{data.uebung}:</span>
-                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                  <span className="text-sm text-muted-foreground">{data.uebung}:</span>
+                  <span className="text-sm font-medium text-card-foreground">
                     {data.ergebnis}
                     {data.uebung.includes("Sprint") ? "s" : ""}
                   </span>
                 </div>
               ))}
             {rightPerformanceData.filter((data) => data.name === rightAthlete).length === 0 && (
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">No performance data available</p>
+              <p className="text-sm text-muted-foreground">No performance data available</p>
             )}
           </div>
         </div>

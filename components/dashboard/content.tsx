@@ -11,21 +11,21 @@ export default function Content() {
   return (
     <div className="space-y-4 md:space-y-6">
       <div className="grid grid-cols-1 gap-6">
-        <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-4 md:p-6 flex flex-col border border-gray-200 dark:border-[#1F1F23]">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4 text-left">Leistungsdiagnostik</h2>
+        <div className="bg-card rounded-xl p-4 md:p-6 flex flex-col border border-border shadow-sm">
+          <h2 className="text-lg font-bold text-card-foreground mb-4 text-left">Leistungsdiagnostik</h2>
 
           <Tabs defaultValue="schnelligkeit" className="w-full">
             <TabsList className="mb-4">
               <TabsTrigger value="schnelligkeit" className="flex items-center gap-2">
-                <Zap className="w-4 h-4" />
+                <Zap className="w-4 h-4 text-chart-1" />
                 Schnelligkeit
               </TabsTrigger>
               <TabsTrigger value="beweglichkeit" className="flex items-center gap-2">
-                <Activity className="w-4 h-4" />
+                <Activity className="w-4 h-4 text-chart-2" />
                 Beweglichkeit
               </TabsTrigger>
               <TabsTrigger value="technik" className="flex items-center gap-2">
-                <Brain className="w-4 h-4" />
+                <Brain className="w-4 h-4 text-chart-3" />
                 Technik
               </TabsTrigger>
             </TabsList>

@@ -34,14 +34,14 @@ export default function VideoSelectionControls({
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {/* Athlete Selector */}
       <div>
-        <label htmlFor="athlete-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="athlete-select" className="block text-sm font-medium text-foreground mb-2">
           Select Athlete
         </label>
         <select
           id="athlete-select"
           value={selectedAthlete}
           onChange={(e) => onAthleteChange(e.target.value)}
-          className="block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900 py-2 px-3 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-amber-500 text-sm"
+          className="block w-full rounded-md border border-input bg-background py-2 px-3 shadow-sm focus:border-primary focus:outline-none focus:ring-primary text-sm"
           disabled={isLoading}
         >
           {allAthletes.map((athlete) => (
@@ -54,14 +54,14 @@ export default function VideoSelectionControls({
 
       {/* Test Type Selector */}
       <div>
-        <label htmlFor="test-type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="test-type" className="block text-sm font-medium text-foreground mb-2">
           Select Test Type
         </label>
         <select
           id="test-type"
           value={selectedTestType}
           onChange={(e) => onTestTypeChange(e.target.value)}
-          className="block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900 py-2 px-3 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-amber-500 text-sm"
+          className="block w-full rounded-md border border-input bg-background py-2 px-3 shadow-sm focus:border-primary focus:outline-none focus:ring-primary text-sm"
           disabled={testTypesForAthlete.length === 0 || isLoading}
         >
           {testTypesForAthlete.length > 0 ? (
@@ -78,14 +78,14 @@ export default function VideoSelectionControls({
 
       {/* Date Selector */}
       <div>
-        <label htmlFor="date-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="date-select" className="block text-sm font-medium text-foreground mb-2">
           Select Date
         </label>
         <select
           id="date-select"
           value={selectedDate || ""}
           onChange={(e) => onDateChange(e.target.value || undefined)}
-          className="block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900 py-2 px-3 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-amber-500 text-sm"
+          className="block w-full rounded-md border border-input bg-background py-2 px-3 shadow-sm focus:border-primary focus:outline-none focus:ring-primary text-sm"
           disabled={availableDates.length === 0 || isLoading}
         >
           <option value="">Latest</option>

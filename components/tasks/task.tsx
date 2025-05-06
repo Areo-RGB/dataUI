@@ -8,26 +8,26 @@ export default function Task() {
     <Layout>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Tasks</h1>
+          <h1 className="text-2xl font-bold text-foreground">Tasks</h1>
         </div>
 
-        <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-6 border border-gray-200 dark:border-[#1F1F23]">
+        <div className="bg-card rounded-xl p-6 border border-border shadow-md">
           <Tabs defaultValue="all" className="w-full">
-            <TabsList className="w-full bg-zinc-100 dark:bg-zinc-800 p-1 rounded-lg">
+            <TabsList className="w-full bg-muted p-1 rounded-lg">
               <TabsTrigger value="all" className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 All Tasks
               </TabsTrigger>
               <TabsTrigger value="pending" className="flex items-center gap-2">
-                <Timer className="w-4 h-4" />
+                <Timer className="w-4 h-4 text-chart-1" />
                 Pending
               </TabsTrigger>
               <TabsTrigger value="in-progress" className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4" />
+                <AlertCircle className="w-4 h-4 text-chart-2" />
                 In Progress
               </TabsTrigger>
               <TabsTrigger value="completed" className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 Completed
               </TabsTrigger>
             </TabsList>
@@ -84,7 +84,7 @@ export default function Task() {
             </TabsContent>
 
             <TabsContent value="completed" className="mt-6 space-y-4">
-              <div className="text-center py-8 text-zinc-500 dark:text-zinc-400">No completed tasks yet</div>
+              <div className="text-center py-8 text-muted-foreground">No completed tasks yet</div>
             </TabsContent>
           </Tabs>
         </div>
