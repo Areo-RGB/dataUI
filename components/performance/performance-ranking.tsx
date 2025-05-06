@@ -15,22 +15,6 @@ import {
 import VideoJsPlayer from "@/components/videos/VideoJsPlayer"
 
 /**
- * Helper function to convert a background color class to a border color class
- * @param bgColorClass The background color class (e.g., "bg-red-600/60")
- * @returns The corresponding border color class (e.g., "border-red-600/60")
- */
-function getBorderColorFromBg(bgColorClass: string): string {
-  // Extract just the color part from the background class
-  // This assumes the format is "bg-{color}" or "bg-{color}/60"
-  const colorMatch = bgColorClass.match(/bg-([a-z]+-[0-9]+(?:\/[0-9]+)?)/)
-  if (colorMatch && colorMatch[1]) {
-    return `border-${colorMatch[1]}`
-  }
-  // Fallback to a default border color if the pattern doesn't match
-  return "border-chart-2"
-}
-
-/**
  * PerformanceRanking component displays a ranking of performance data
  * and provides video playback functionality for associated videos.
  */
@@ -162,9 +146,17 @@ export default function PerformanceRanking({
 
             // Get gradient colors (now more muted)
             const indicatorColor = getGradientColor(percentile)
-            // Convert the background color to a border color
-            const borderColor = !isBenchmark ? getBorderColorFromBg(indicatorColor) : "border-muted-foreground/40"
             const textColor = getGradientTextColor(percentile)
+
+            // Determine border color based on whether it's a benchmark and the percentile
+            let borderColorClass = "border-muted-foreground/40"
+            if (!isBenchmark) {
+              if (percentile < 31) borderColorClass = "border-red-600/60"
+              else if (percentile < 71) borderColorClass = "border-orange-500/60"
+              else if (percentile < 81) borderColorClass = "border-yellow-500/60"
+              else if (percentile < 91) borderColorClass = "border-green-500/60"
+              else borderColorClass = "border-green-600/60"
+            }
 
             return (
               <div
@@ -189,7 +181,7 @@ export default function PerformanceRanking({
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
                     "border-2",
-                    borderColor,
+                    borderColorClass,
                     isBenchmark ? "bg-muted/50 text-muted-foreground" : "bg-muted text-card-foreground",
                     "text-sm font-semibold",
                   )}
