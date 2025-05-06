@@ -170,17 +170,16 @@ export default function PerformanceRanking({
                   "relative", // Added for absolute positioning of category indicator
                 )}
               >
-                {/* Gradient Indicator with muted colors */}
+                {/* Gradient Indicator with muted colors - reduced width */}
                 <div
-                  className={`absolute left-0 top-0 bottom-0 w-1 ${indicatorColor} rounded-l-lg`}
+                  className={`absolute left-0 top-0 bottom-0 w-0.5 ${indicatorColor} rounded-l-lg`}
                   title={`${percentile}% - ${category}`}
                 ></div>
 
                 <div
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
-                    "border-2",
-                    "border-zinc-400 dark:border-zinc-600",
+                    "border-2 border-zinc-400 dark:border-zinc-600",
                     "text-sm font-semibold",
                     "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300",
                   )}
