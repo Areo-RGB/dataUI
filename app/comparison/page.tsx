@@ -10,9 +10,9 @@ export default function ComparisonPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-4 md:p-6 border border-gray-200 dark:border-[#1F1F23]">
+          <div className="bg-card rounded-xl p-4 md:p-6 border border-border shadow-sm">
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">Athlete Comparison</h2>
+              <h2 className="text-lg font-bold text-card-foreground">Athlete Comparison</h2>
               <ComparisonView />
             </div>
           </div>

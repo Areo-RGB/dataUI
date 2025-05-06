@@ -32,9 +32,9 @@ export default function VideosPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-4 md:p-6 border border-gray-200 dark:border-[#1F1F23]">
+          <div className="bg-card rounded-xl p-4 md:p-6 border border-border shadow-sm">
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">Training Session Analysis</h2>
+              <h2 className="text-lg font-bold text-card-foreground">Training Session Analysis</h2>
 
               {/* Selection Controls Component */}
               <VideoSelectionControls
@@ -75,7 +75,7 @@ export default function VideosPage() {
                   {/* Video Details */}
                   <div className="flex flex-col md:flex-row items-start gap-4">
                     <div className="flex-1">
-                      <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                      <h3 className="text-base font-semibold text-card-foreground">
                         {selectedAthlete} - {selectedTestType} Test
                       </h3>
                       <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
@@ -107,11 +107,11 @@ export default function VideosPage() {
                   {/* Performance Data */}
                   {athleteData.length > 0 && (
                     <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                      <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-2">Performance Data</h4>
+                      <h4 className="text-sm font-semibold text-card-foreground mb-2">Performance Data</h4>
                       <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-3">
                         <div className="flex items-center justify-between">
                           <span className="text-sm text-zinc-700 dark:text-zinc-300">Result:</span>
-                          <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                          <span className="text-sm font-medium text-card-foreground">
                             {athleteData.find((d) => d.name === selectedAthlete)?.ergebnis || "N/A"}
                             {selectedTestType.includes("Sprint") ? "s" : ""}
                           </span>
@@ -123,13 +123,11 @@ export default function VideosPage() {
                   {/* Annotations */}
                   {athleteVideo && (
                     <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                      <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-2">Annotations</h4>
+                      <h4 className="text-sm font-semibold text-card-foreground mb-2">Annotations</h4>
                       <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-3">
                         <div className="flex items-center justify-between">
                           <span className="text-sm text-zinc-700 dark:text-zinc-300">Available annotations:</span>
-                          <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                            {annotationCount}
-                          </span>
+                          <span className="text-sm font-medium text-card-foreground">{annotationCount}</span>
                         </div>
                         <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
                           Annotations will appear automatically during video playback
@@ -140,7 +138,7 @@ export default function VideosPage() {
 
                   {/* Coach Notes */}
                   <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                    <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-2">Coach Notes</h4>
+                    <h4 className="text-sm font-semibold text-card-foreground mb-2">Coach Notes</h4>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400">
                       {selectedAthlete} demonstrates good technique with a time of{" "}
                       {athleteData.find((d) => d.name === selectedAthlete)?.ergebnis || "N/A"} in the {selectedTestType}{" "}

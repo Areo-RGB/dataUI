@@ -8,10 +8,10 @@ export default function Task() {
     <Layout>
       <div className="space-y-4 md:space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Tasks</h1>
+          <h1 className="text-2xl font-bold text-foreground">Tasks</h1>
         </div>
 
-        <div className="bg-white dark:bg-[#0F0F12] rounded-xl p-4 md:p-6 border border-gray-200 dark:border-[#1F1F23]">
+        <div className="bg-card rounded-xl p-4 md:p-6 border border-border shadow-sm">
           <Tabs defaultValue="all" className="w-full">
             <TabsList className="">
               <TabsTrigger value="all" className="flex items-center gap-2">
