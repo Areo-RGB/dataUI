@@ -6,7 +6,7 @@ import FinancialGoalList from "@/components/tasks/financial-goal-list"
 export default function Task() {
   return (
     <Layout>
-      <div className="space-y-4 md:space-y-6">
+      <div className="space-y-4 md:space-y-6 bg-gradient-to-b from-accent-4/20 to-transparent">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-foreground">Tasks</h1>
         </div>

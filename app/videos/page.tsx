@@ -26,7 +26,7 @@ export default function VideosPage() {
 
   return (
     <Layout>
-      <div className="space-y-4 md:space-y-6">
+      <div className="space-y-4 md:space-y-6 bg-gradient-to-b from-accent-4/20 to-transparent">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Videos</h1>
         </div>
