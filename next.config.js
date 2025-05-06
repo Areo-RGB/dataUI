@@ -1,6 +1,7 @@
+const { withNextVideo } = require("next-video/process")
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -8,13 +9,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["localhost"],
     unoptimized: true,
   },
-  // Simplified experimental features
-  experimental: {
-    // Only include features that are definitely supported in your Next.js version
-  },
+  transpilePackages: ["geist"],
+  // Your existing Next.js config
 }
 
-module.exports = nextConfig
+module.exports = withNextVideo(nextConfig)

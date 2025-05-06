@@ -1,5 +1,8 @@
 import type React from "react"
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
 import "./globals.css"
+import { cn } from "@/lib/utils"
 
 export const metadata = {
   title: "Finley Dashboard",
@@ -16,10 +19,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className="bg-background text-foreground">
-        {children}
-      </body>
+    <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
+      <body className={cn("bg-background text-foreground font-sans")}>{children}</body>
     </html>
   )
 }
