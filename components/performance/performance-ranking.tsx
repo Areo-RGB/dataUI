@@ -1,11 +1,17 @@
 "use client"
 
-import { useState, useMemo } from "react" // Added useMemo
+import { useState, useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { Film } from "lucide-react"
 import type { PerformanceRankingProps } from "@/types/performance"
-import type { ButtonVideoMapping } from "@/types/videos" // Added ButtonVideoMapping type
-import { getVideoMappingsForExercise } from "@/lib/data" // Only import what we need
+import type { ButtonVideoMapping } from "@/types/videos"
+import {
+  getVideoMappingsForExercise,
+  estimatePlayerPercentile,
+  getPerformanceCategory,
+  getGradientColor,
+  getGradientTextColor,
+} from "@/lib/data"
 import VideoJsPlayer from "@/components/videos/VideoJsPlayer"
 
 /**
@@ -13,8 +19,8 @@ import VideoJsPlayer from "@/components/videos/VideoJsPlayer"
  * and provides video playback functionality for associated videos.
  */
 export default function PerformanceRanking({
-  title, // Key used for data lookup
-  displayTitle, // Optional display title for the UI
+  title,
+  displayTitle,
   data,
   className,
   unit = "s",
@@ -22,6 +28,7 @@ export default function PerformanceRanking({
 }: PerformanceRankingProps) {
   const [isPlayingVideo, setIsPlayingVideo] = useState(false)
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string | undefined>(undefined)
+  const [showCategoryLegend, setShowCategoryLegend] = useState(false)
 
   // Get video mappings for this exercise using the title prop as the key
   // This is memoized to prevent unnecessary recalculations
@@ -56,6 +63,22 @@ export default function PerformanceRanking({
     return sortAscending ? aResult - bResult : bResult - aResult
   })
 
+  // Generate gradient legend items with muted colors
+  const gradientLegendItems = [
+    { percentile: "0-3%", color: "bg-red-800/60" },
+    { percentile: "3-10%", color: "bg-red-700/60" },
+    { percentile: "10-20%", color: "bg-red-600/60" },
+    { percentile: "20-30%", color: "bg-red-500/60" },
+    { percentile: "30-40%", color: "bg-orange-600/60" },
+    { percentile: "40-50%", color: "bg-orange-500/60" },
+    { percentile: "50-60%", color: "bg-orange-400/60" },
+    { percentile: "60-70%", color: "bg-yellow-500/60" },
+    { percentile: "70-80%", color: "bg-yellow-400/60" },
+    { percentile: "80-90%", color: "bg-green-400/60" },
+    { percentile: "90-97%", color: "bg-green-500/60" },
+    { percentile: ">97%", color: "bg-green-600/60" },
+  ]
+
   return (
     <div
       className={cn(
@@ -63,7 +86,7 @@ export default function PerformanceRanking({
         "bg-white dark:bg-zinc-900/70",
         "border border-zinc-100 dark:border-zinc-800",
         "rounded-xl shadow-sm backdrop-blur-xl",
-        "relative", // Added for video positioning
+        "relative",
         className,
       )}
     >
@@ -85,20 +108,53 @@ export default function PerformanceRanking({
           <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{displayTitle || title}</h2>
           <div className="flex flex-wrap items-center gap-2 gap-y-1">
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 rounded-full border-2 border-blue-300 dark:border-blue-700/60"></div>
+              <div className="w-3 h-3 rounded-full border-2 border-zinc-400 dark:border-zinc-600"></div>
               <span className="text-xs text-zinc-600 dark:text-zinc-400">Benchmark</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 rounded-full border-2 border-amber-300 dark:border-amber-700/60"></div>
+              <div className="w-3 h-3 rounded-full border-2 border-blue-500 dark:border-blue-500"></div>
               <span className="text-xs text-zinc-600 dark:text-zinc-400">Player</span>
             </div>
+            <button
+              onClick={() => setShowCategoryLegend(!showCategoryLegend)}
+              className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"
+            >
+              {showCategoryLegend ? "Hide" : "Show"} Gradient
+            </button>
           </div>
         </div>
+
+        {/* Gradient Legend with muted colors */}
+        {showCategoryLegend && (
+          <div className="mb-3 p-2 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg text-xs">
+            <div className="font-medium mb-1 text-zinc-700 dark:text-zinc-300">Performance Gradient:</div>
+            <div className="flex items-center mb-2">
+              <div className="h-4 flex-1 bg-gradient-to-r from-red-800/60 via-orange-500/60 to-green-600/60 rounded-sm"></div>
+            </div>
+            <div className="grid grid-cols-3 gap-x-2 gap-y-1">
+              {gradientLegendItems.map((item) => (
+                <div key={item.percentile} className="flex items-center gap-2">
+                  <div className={`w-2 h-4 rounded-sm ${item.color}`}></div>
+                  <span className="text-zinc-600 dark:text-zinc-400">{item.percentile}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="space-y-1">
           {sortedData.map((item, index) => {
             const isBenchmark = item.name.startsWith("DFB")
-            const percentile = isBenchmark ? item.name.split("-")[1] : null
+            const percentile = isBenchmark
+              ? Number.parseInt(item.name.split("-")[1] || "0", 10)
+              : estimatePlayerPercentile(item.ergebnis, title)
+
+            // Get category for display
+            const category = getPerformanceCategory(percentile)
+
+            // Get gradient colors (now more muted)
+            const indicatorColor = getGradientColor(percentile)
+            const textColor = getGradientTextColor(percentile)
 
             return (
               <div
@@ -108,15 +164,20 @@ export default function PerformanceRanking({
                   "p-2 rounded-lg",
                   "hover:bg-zinc-100 dark:hover:bg-zinc-800/50",
                   "transition-all duration-200",
+                  "relative", // Added for absolute positioning of category indicator
                 )}
               >
+                {/* Gradient Indicator with muted colors */}
+                <div
+                  className={`absolute left-0 top-0 bottom-0 w-1 ${indicatorColor} rounded-l-lg`}
+                  title={`${percentile}% - ${category}`}
+                ></div>
+
                 <div
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
                     "border-2",
-                    isBenchmark
-                      ? "border-blue-300 dark:border-blue-700/60"
-                      : "border-amber-300 dark:border-amber-700/60",
+                    isBenchmark ? "border-zinc-400 dark:border-zinc-600" : "border-blue-500 dark:border-blue-500",
                     "text-sm font-semibold",
                     "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300",
                   )}
@@ -131,6 +192,11 @@ export default function PerformanceRanking({
                       {isBenchmark && percentile && (
                         <span className="ml-1 text-[10px] text-zinc-500 dark:text-zinc-400">(P{percentile})</span>
                       )}
+                      {!isBenchmark && percentile && (
+                        <span className={`ml-1 text-[10px] ${textColor}`}>
+                          (P{percentile} - {category})
+                        </span>
+                      )}
                     </h3>
                     <p className="text-[11px] text-zinc-600 dark:text-zinc-400">
                       {isBenchmark ? "DFB Benchmark" : item.kategorie}
@@ -138,7 +204,9 @@ export default function PerformanceRanking({
                   </div>
 
                   <div className="flex items-center gap-1.5 pl-3">
-                    <span className="text-xs font-medium text-zinc-900 dark:text-zinc-100">
+                    <span
+                      className={`text-xs font-medium ${!isBenchmark ? textColor : "text-zinc-900 dark:text-zinc-100"}`}
+                    >
                       {item.ergebnis}
                       {unit}
                     </span>

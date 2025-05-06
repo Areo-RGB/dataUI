@@ -485,6 +485,223 @@ export function comparePlayerWithPlayer(player1: string, player2: string): Perfo
   return comparePerformanceData(player1Data, player2Data)
 }
 
+// Add these new functions after the existing helper functions but before the video-related functions
+
+/**
+ * Determine if lower values are better for a given exercise
+ * @param exercise The exercise name
+ * @returns Boolean indicating if lower values are better
+ */
+export function isLowerBetter(exercise: string): boolean {
+  // Define exercises where higher values are better
+  const higherIsBetter = ["Balljonglieren", "YoYo IR1"]
+  // For all other exercises, lower values are better
+  return !higherIsBetter.includes(exercise)
+}
+
+/**
+ * Estimate the percentile for a player's result in a specific exercise
+ * @param playerResult The player's result
+ * @param exercise The exercise name
+ * @returns The estimated percentile or null if cannot be determined
+ */
+export function estimatePlayerPercentile(playerResult: number | string, exercise: string): number | null {
+  // Convert string results to numbers
+  const result =
+    typeof playerResult === "string" ? Number.parseFloat(playerResult.replace(/[^\d.]/g, "")) : playerResult
+
+  if (isNaN(result)) return null
+
+  // Get ONLY benchmark data for this exercise (DFB-XX values)
+  const benchmarks = getBenchmarkData(exercise)
+    .map((item) => {
+      // Extract percentile from DFB-XX format
+      const percentileMatch = item.name.match(/DFB-(\d+)/)
+      const percentile = percentileMatch ? Number.parseInt(percentileMatch[1], 10) : Number.NaN
+
+      const benchmarkResult =
+        typeof item.ergebnis === "string" ? Number.parseFloat(item.ergebnis.replace(/[^\d.]/g, "")) : item.ergebnis
+
+      return { percentile, result: benchmarkResult }
+    })
+    .filter((item) => !isNaN(item.percentile) && !isNaN(item.result))
+
+  if (benchmarks.length < 2) return null
+
+  // Sort benchmarks by result
+  const lowerBetter = isLowerBetter(exercise)
+  benchmarks.sort((a, b) => (lowerBetter ? a.result - b.result : b.result - a.result))
+
+  // Handle edge cases
+  if (lowerBetter) {
+    if (result <= benchmarks[0].result) return benchmarks[0].percentile
+    if (result >= benchmarks[benchmarks.length - 1].result) return benchmarks[benchmarks.length - 1].percentile
+  } else {
+    if (result >= benchmarks[0].result) return benchmarks[0].percentile
+    if (result <= benchmarks[benchmarks.length - 1].result) return benchmarks[benchmarks.length - 1].percentile
+  }
+
+  // Find the two benchmarks the player falls between
+  let lowerBenchmark, upperBenchmark
+
+  for (let i = 0; i < benchmarks.length - 1; i++) {
+    const current = benchmarks[i]
+    const next = benchmarks[i + 1]
+
+    if (lowerBetter) {
+      if (result >= current.result && result <= next.result) {
+        lowerBenchmark = current
+        upperBenchmark = next
+        break
+      }
+    } else {
+      if (result <= current.result && result >= next.result) {
+        lowerBenchmark = current
+        upperBenchmark = next
+        break
+      }
+    }
+  }
+
+  if (!lowerBenchmark || !upperBenchmark) return null
+
+  // Linear interpolation to estimate percentile
+  const resultRange = upperBenchmark.result - lowerBenchmark.result
+  const percentileRange = upperBenchmark.percentile - lowerBenchmark.percentile
+  const relativePosition = (result - lowerBenchmark.result) / resultRange
+
+  return Math.round(lowerBenchmark.percentile + relativePosition * percentileRange)
+}
+
+/**
+ * Get the performance category for a given percentile
+ * @param percentile The percentile value (0-100)
+ * @returns The performance category
+ */
+export function getPerformanceCategory(percentile: number | null): string {
+  if (percentile === null) return "unknown"
+
+  if (percentile < 3) return "sehr schwach"
+  if (percentile < 30) return "unterdurchschnittlich"
+  if (percentile < 70) return "durchschnittlich"
+  if (percentile < 80) return "gut"
+  if (percentile < 97) return "sehr gut"
+  return "hervorragend"
+}
+
+/**
+ * Get the color for a performance category
+ * @param category The performance category
+ * @returns The color class for the category
+ */
+export function getCategoryColor(category: string): string {
+  switch (category) {
+    case "sehr schwach":
+      return "text-red-700" // Muted red for worst performance
+    case "unterdurchschnittlich":
+      return "text-red-500" // Less muted red
+    case "durchschnittlich":
+      return "text-orange-500" // Somewhat muted orange for middle performance
+    case "gut":
+      return "text-yellow-500" // Moving toward better
+    case "sehr gut":
+      return "text-green-400" // Light green
+    case "hervorragend":
+      return "text-green-500" // Best performance
+    default:
+      return "text-gray-500"
+  }
+}
+
+// Add this new function to the data.ts file after the getCategoryColor function
+
+/**
+ * Get a color from a gradient based on percentile
+ * @param percentile The percentile value (0-100)
+ * @returns The color class for the percentile on a gradient scale
+ */
+export function getGradientColor(percentile: number | null): string {
+  if (percentile === null) return "bg-gray-300/40"
+
+  // Ensure percentile is within 0-100 range
+  const boundedPercentile = Math.max(0, Math.min(100, percentile))
+
+  // Define gradient stops with more muted colors (using opacity)
+  if (boundedPercentile < 3) {
+    return "bg-red-800/60" // Very poor performance
+  } else if (boundedPercentile < 10) {
+    return "bg-red-700/60"
+  } else if (boundedPercentile < 20) {
+    return "bg-red-600/60"
+  } else if (boundedPercentile < 30) {
+    return "bg-red-500/60"
+  } else if (boundedPercentile < 40) {
+    return "bg-orange-600/60"
+  } else if (boundedPercentile < 50) {
+    return "bg-orange-500/60"
+  } else if (boundedPercentile < 60) {
+    return "bg-orange-400/60"
+  } else if (boundedPercentile < 70) {
+    return "bg-yellow-500/60"
+  } else if (boundedPercentile < 80) {
+    return "bg-yellow-400/60"
+  } else if (boundedPercentile < 90) {
+    return "bg-green-400/60"
+  } else if (boundedPercentile < 97) {
+    return "bg-green-500/60"
+  } else {
+    return "bg-green-600/60" // Excellent performance
+  }
+}
+
+/**
+ * Get a text color from a gradient based on percentile
+ * @param percentile The percentile value (0-100)
+ * @returns The text color class for the percentile on a gradient scale
+ */
+export function getGradientTextColor(percentile: number | null): string {
+  if (percentile === null) return "text-gray-500/70"
+
+  // Convert bg- classes to text- classes but keep them more subtle
+  // We'll use the same colors but with higher opacity for text to ensure readability
+  const bgColor = getGradientColor(percentile)
+  return bgColor.replace("bg-", "text-").replace("/60", "/80")
+}
+
+/**
+ * Get the color for a percentile value
+ * @param percentile The percentile value (0-100)
+ * @returns The color class for the percentile
+ */
+export function getPercentileColor(percentile: number | null): string {
+  if (percentile === null) return "text-gray-500"
+  return getCategoryColor(getPerformanceCategory(percentile))
+}
+
+/**
+ * Get the performance data with percentile information
+ * @param data The performance data array
+ * @returns The performance data with percentile information
+ */
+export function getPerformanceWithPercentiles(data: PerformanceData[]): (PerformanceData & {
+  percentile: number | null
+  category: string
+  colorClass: string
+})[] {
+  return data.map((item) => {
+    const percentile = estimatePlayerPercentile(item.ergebnis, item.uebung)
+    const category = getPerformanceCategory(percentile)
+    const colorClass = getCategoryColor(category)
+
+    return {
+      ...item,
+      percentile,
+      category,
+      colorClass,
+    }
+  })
+}
+
 // Add these helper functions at the end of the file
 
 /**
