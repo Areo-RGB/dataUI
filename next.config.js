@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
-  swcMinify: false,
+  reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -9,13 +8,12 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    domains: ["localhost"],
     unoptimized: true,
   },
-  // Disable any experimental features
+  // Simplified experimental features
   experimental: {
-    // Disable any experimental features that might be enabled
-    serverActions: false,
-    serverComponents: false,
+    // Only include features that are definitely supported in your Next.js version
   },
 }
 
