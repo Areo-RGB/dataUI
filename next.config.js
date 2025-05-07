@@ -1,4 +1,10 @@
 const { withNextVideo } = require("next-video/process")
+const withPWA = require("next-pwa")({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+  register: true,
+  skipWaiting: true,
+})
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,4 +21,4 @@ const nextConfig = {
   // Your existing Next.js config
 }
 
-module.exports = withNextVideo(nextConfig)
+module.exports = withPWA(withNextVideo(nextConfig))

@@ -88,7 +88,7 @@ export const performanceData: PerformanceData[] = [
 export const videoData: VideoData[] = [
   // Gewandtheit videos
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/3.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Finley",
     test: "Gewandtheit",
     result: 7.81,
@@ -97,7 +97,7 @@ export const videoData: VideoData[] = [
     buttonIndex: 0, // First button
   },
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/6.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Bent",
     test: "Gewandtheit",
     result: 8.14,
@@ -108,7 +108,7 @@ export const videoData: VideoData[] = [
 
   // 10m Sprint videos
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Finley",
     test: "10m Sprint",
     result: 2.0,
@@ -117,7 +117,7 @@ export const videoData: VideoData[] = [
     buttonIndex: 0, // First button
   },
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint2.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Alex",
     test: "10m Sprint",
     result: 2.16,
@@ -126,7 +126,7 @@ export const videoData: VideoData[] = [
     buttonIndex: 1, // Second button
   },
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/999_tvai.mp4",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Bent",
     test: "10m Sprint",
     result: 2.19,
@@ -137,7 +137,7 @@ export const videoData: VideoData[] = [
 
   // Dribbling videos
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble1.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Finley",
     test: "Dribbling",
     result: 10.27,
@@ -146,7 +146,7 @@ export const videoData: VideoData[] = [
     buttonIndex: 0, // First button
   },
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble2.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Bent",
     test: "Dribbling",
     result: 10.28,
@@ -157,7 +157,7 @@ export const videoData: VideoData[] = [
 
   // Ballkontrolle videos
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol1.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Finley",
     test: "Ballkontrolle",
     result: 10.82,
@@ -166,7 +166,7 @@ export const videoData: VideoData[] = [
     buttonIndex: 0, // First button
   },
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol2.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Bent",
     test: "Ballkontrolle",
     result: 8.95,
@@ -177,7 +177,7 @@ export const videoData: VideoData[] = [
 
   // 20m Sprint videos
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint1.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Finley",
     test: "20m Sprint",
     result: 3.59,
@@ -188,7 +188,7 @@ export const videoData: VideoData[] = [
 
   // Balljonglieren videos
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/f1.webm",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Finley",
     test: "Balljonglieren",
     result: 0.0,
@@ -197,7 +197,7 @@ export const videoData: VideoData[] = [
     buttonIndex: 0, // First button
   },
   {
-    url: "https://data3.fra1.cdn.digitaloceanspaces.com/6.mp4",
+    url: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
     name: "Alex",
     test: "Balljonglieren",
     result: 3.0,
@@ -212,84 +212,82 @@ export const buttonVideoMappings: Record<string, ButtonVideoMapping[]> = {
   "10m Sprint": [
     {
       buttonIndex: 0,
-      videoUrl:
-        "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Finley",
     },
     {
       buttonIndex: 1,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint2.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Alex",
     },
     {
       buttonIndex: 2,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/999_tvai.mp4",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Bent",
     },
   ],
   "20m Sprint": [
     {
       buttonIndex: 0,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/sprint1.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Finley",
     },
     {
       buttonIndex: 1,
-      videoUrl:
-        "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Technique",
     },
     {
       buttonIndex: 2,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/999_tvai.mp4",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Analysis",
     },
   ],
   Gewandtheit: [
     {
       buttonIndex: 0,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/3.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Finley",
     },
     {
       buttonIndex: 1,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/6.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Bent",
     },
   ],
   Dribbling: [
     {
       buttonIndex: 0,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble1.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Finley",
     },
     {
       buttonIndex: 1,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/dribble2.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Bent",
     },
   ],
   Ballkontrolle: [
     {
       buttonIndex: 0,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol1.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Finley",
     },
     {
       buttonIndex: 1,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/ballcontrol2.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Bent",
     },
   ],
   Balljonglieren: [
     {
       buttonIndex: 0,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/f1.webm",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Finley",
     },
     {
       buttonIndex: 1,
-      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/6.mp4",
+      videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
       label: "Alex",
     },
   ],
@@ -305,7 +303,7 @@ export const buttonVideoMappings: Record<string, ButtonVideoMapping[]> = {
 // buttonVideoMappings["10m Sprint"] = [
 //   {
 //     buttonIndex: 0,
-//     videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/Dji%2020240705165214%200123%20D%20Thm2%20Amq13%20-%20(4X5).mp4",
+//     videoUrl: "https://data3.fra1.cdn.digitaloceanspaces.com/a1%20(2).mp4",
 //     label: "Finley",
 //   },
 //   ...

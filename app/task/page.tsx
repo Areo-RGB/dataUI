@@ -1,93 +1,38 @@
-import { Calendar, Timer, AlertCircle, CheckCircle2 } from "lucide-react"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+"use client"
 import Layout from "@/components/layout/layout"
-import FinancialGoalList from "@/components/tasks/financial-goal-list"
+import { Timeline } from "@/components/timeline"
+import { Card } from "@/components/ui/card"
 
 export default function Task() {
+  const timelineData = [
+    {
+      title: "Finley Passen+",
+      content: (
+        <Card className="p-4 md:p-6">
+          <div className="relative w-full max-w-[400px] mx-auto aspect-[9/16] mb-4 rounded-lg overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/EZX-tKDc1v4"
+              title="YouTube video player"
+              className="absolute top-0 left-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+          <div className="flex items-center text-sm text-muted-foreground">
+            <span className="mr-2">03.05.2025</span>
+            <span className="px-2 py-1 rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 text-xs">
+              Completed
+            </span>
+          </div>
+        </Card>
+      ),
+    },
+  ]
+
   return (
     <Layout>
       <div className="space-y-4 md:space-y-6 bg-gradient-to-b from-accent-4/20 to-transparent">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-foreground">Tasks</h1>
-        </div>
-
-        <div className="bg-card rounded-xl p-4 md:p-6 border border-border shadow-sm">
-          <Tabs defaultValue="all" className="w-full">
-            <TabsList className="">
-              <TabsTrigger value="all" className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                All Tasks
-              </TabsTrigger>
-              <TabsTrigger value="pending" className="flex items-center gap-2">
-                <Timer className="w-4 h-4" />
-                Pending
-              </TabsTrigger>
-              <TabsTrigger value="in-progress" className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4" />
-                In Progress
-              </TabsTrigger>
-              <TabsTrigger value="completed" className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" />
-                Completed
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="all" className="mt-6 space-y-4">
-              <FinancialGoalList />
-            </TabsContent>
-
-            <TabsContent value="pending" className="mt-6 space-y-4">
-              <FinancialGoalList
-                items={[
-                  {
-                    id: "2",
-                    title: "Stock Portfolio",
-                    subtitle: "Tech sector investment plan",
-                    icon: Timer,
-                    iconStyle: "investment",
-                    date: "Target: Jun 2024",
-                    amount: "$50,000",
-                    status: "pending",
-                    progress: 30,
-                  },
-                ]}
-              />
-            </TabsContent>
-
-            <TabsContent value="in-progress" className="mt-6 space-y-4">
-              <FinancialGoalList
-                items={[
-                  {
-                    id: "1",
-                    title: "Emergency Fund",
-                    subtitle: "3 months of expenses saved",
-                    icon: AlertCircle,
-                    iconStyle: "savings",
-                    date: "Target: Dec 2024",
-                    amount: "$15,000",
-                    status: "in-progress",
-                    progress: 65,
-                  },
-                  {
-                    id: "3",
-                    title: "Debt Repayment",
-                    subtitle: "Student loan payoff plan",
-                    icon: AlertCircle,
-                    iconStyle: "debt",
-                    date: "Target: Mar 2025",
-                    amount: "$25,000",
-                    status: "in-progress",
-                    progress: 45,
-                  },
-                ]}
-              />
-            </TabsContent>
-
-            <TabsContent value="completed" className="mt-6 space-y-4">
-              <div className="text-center py-8 text-zinc-500 dark:text-zinc-400">No completed tasks yet</div>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <Timeline data={timelineData} />
       </div>
     </Layout>
   )
