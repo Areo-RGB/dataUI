@@ -318,7 +318,7 @@ export default function EnhancedVideoComparison({
     <div
       ref={containerRef}
       className={cn(
-        "relative bg-zinc-900 rounded-xl overflow-hidden",
+        "relative bg-background rounded-xl overflow-hidden", // bg-zinc-900 -> bg-background
         isFullscreen ? "fixed inset-0 z-50" : "w-full",
         className,
       )}
@@ -329,13 +329,13 @@ export default function EnhancedVideoComparison({
           <video
             ref={leftVideoRef}
             src={leftSrc}
-            className="w-full h-full object-contain bg-black"
+            className="w-full h-full object-contain bg-black" // bg-black for video area is common, leaving as is.
             onClick={togglePlay}
             playsInline
           />
           {leftTitle && (
-            <div className="absolute top-0 left-0 right-0 p-2 bg-gradient-to-b from-black/70 to-transparent">
-              <h3 className="text-white text-sm font-medium truncate">{leftTitle}</h3>
+            <div className="absolute top-0 left-0 right-0 p-2 bg-gradient-to-b from-background/70 to-transparent"> {/* from-black/70 -> from-background/70 */}
+              <h3 className="text-primary-foreground text-sm font-medium truncate">{leftTitle}</h3> {/* text-white -> text-primary-foreground */}
             </div>
           )}
 
@@ -367,13 +367,13 @@ export default function EnhancedVideoComparison({
           <video
             ref={rightVideoRef}
             src={rightSrc}
-            className="w-full h-full object-contain bg-black"
+            className="w-full h-full object-contain bg-black" // bg-black for video area is common, leaving as is.
             onClick={togglePlay}
             playsInline
           />
           {rightTitle && (
-            <div className="absolute top-0 left-0 right-0 p-2 bg-gradient-to-b from-black/70 to-transparent">
-              <h3 className="text-white text-sm font-medium truncate">{rightTitle}</h3>
+            <div className="absolute top-0 left-0 right-0 p-2 bg-gradient-to-b from-background/70 to-transparent"> {/* from-black/70 -> from-background/70 */}
+              <h3 className="text-primary-foreground text-sm font-medium truncate">{rightTitle}</h3> {/* text-white -> text-primary-foreground */}
             </div>
           )}
 
@@ -402,7 +402,7 @@ export default function EnhancedVideoComparison({
       </div>
 
       {/* Controls */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/70 to-transparent p-4"> {/* from-black/70 -> from-background/70 */}
         {/* Progress Bar */}
         <div className="flex items-center mb-2">
           <input
@@ -411,9 +411,9 @@ export default function EnhancedVideoComparison({
             max={duration || 100}
             value={currentTime}
             onChange={handleSeek}
-            className="w-full h-1.5 rounded-full bg-zinc-600 appearance-none cursor-pointer"
+            className="w-full h-1.5 rounded-full bg-muted appearance-none cursor-pointer" // bg-zinc-600 -> bg-muted
             style={{
-              backgroundImage: `linear-gradient(to right, #f59e0b ${(currentTime / (duration || 1)) * 100}%, #52525b ${
+              backgroundImage: `linear-gradient(to right, hsl(var(--chart-5)) ${(currentTime / (duration || 1)) * 100}%, hsl(var(--muted)) ${ // #f59e0b -> hsl(var(--chart-5)), #52525b -> hsl(var(--muted))
                 (currentTime / (duration || 1)) * 100
               }%)`,
             }}
@@ -426,7 +426,7 @@ export default function EnhancedVideoComparison({
             {/* Play/Pause */}
             <button
               onClick={togglePlay}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label={isPlaying ? "Pause" : "Play"}
             >
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -436,7 +436,7 @@ export default function EnhancedVideoComparison({
             <div className="flex items-center space-x-1">
               <button
                 onClick={prevFrame}
-                className="text-white hover:text-amber-400 transition-colors"
+                className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
                 aria-label="Previous frame"
                 title="Previous frame"
               >
@@ -444,7 +444,7 @@ export default function EnhancedVideoComparison({
               </button>
               <button
                 onClick={nextFrame}
-                className="text-white hover:text-amber-400 transition-colors"
+                className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
                 aria-label="Next frame"
                 title="Next frame"
               >
@@ -455,7 +455,7 @@ export default function EnhancedVideoComparison({
             {/* Skip Backward */}
             <button
               onClick={() => skip(-5)}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label="Skip backward 5 seconds"
             >
               <SkipBack className="w-4 h-4" />
@@ -464,7 +464,7 @@ export default function EnhancedVideoComparison({
             {/* Skip Forward */}
             <button
               onClick={() => skip(5)}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label="Skip forward 5 seconds"
             >
               <SkipForward className="w-4 h-4" />
@@ -476,7 +476,7 @@ export default function EnhancedVideoComparison({
                 onClick={() => changePlaybackSpeed(0.25)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 0.25 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 0.25 ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50", // bg-amber-500 text-black -> bg-chart-5 text-primary-foreground, text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50
                 )}
                 aria-label="0.25x speed"
                 title="0.25x speed"
@@ -487,7 +487,7 @@ export default function EnhancedVideoComparison({
                 onClick={() => changePlaybackSpeed(0.5)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 0.5 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 0.5 ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50", // bg-amber-500 text-black -> bg-chart-5 text-primary-foreground, text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50
                 )}
                 aria-label="0.5x speed"
                 title="0.5x speed"
@@ -498,7 +498,7 @@ export default function EnhancedVideoComparison({
                 onClick={() => changePlaybackSpeed(1)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 1 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 1 ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50", // bg-amber-500 text-black -> bg-chart-5 text-primary-foreground, text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50
                 )}
                 aria-label="1x speed"
                 title="1x speed"
@@ -508,7 +508,7 @@ export default function EnhancedVideoComparison({
             </div>
 
             {/* Time Display */}
-            <div className="text-white text-xs">
+            <div className="text-primary-foreground text-xs"> {/* text-white -> text-primary-foreground */}
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
           </div>
@@ -518,8 +518,8 @@ export default function EnhancedVideoComparison({
             <button
               onClick={() => setShowAnnotations(!showAnnotations)}
               className={cn(
-                "text-white transition-colors",
-                showAnnotations ? "text-amber-400 hover:text-white" : "hover:text-amber-400",
+                "text-primary-foreground transition-colors", // text-white -> text-primary-foreground
+                showAnnotations ? "text-chart-5 hover:text-primary-foreground" : "hover:text-chart-5", // text-amber-400 hover:text-white -> text-chart-5 hover:text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               )}
               aria-label={showAnnotations ? "Hide annotations" : "Show annotations"}
               title={showAnnotations ? "Hide annotations" : "Show annotations"}
@@ -531,8 +531,8 @@ export default function EnhancedVideoComparison({
             <button
               onClick={() => setShowMetrics(!showMetrics)}
               className={cn(
-                "text-white transition-colors",
-                showMetrics ? "text-amber-400 hover:text-white" : "hover:text-amber-400",
+                "text-primary-foreground transition-colors", // text-white -> text-primary-foreground
+                showMetrics ? "text-chart-5 hover:text-primary-foreground" : "hover:text-chart-5", // text-amber-400 hover:text-white -> text-chart-5 hover:text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               )}
               aria-label={showMetrics ? "Hide metrics" : "Show metrics"}
               title={showMetrics ? "Hide metrics" : "Show metrics"}
@@ -544,8 +544,8 @@ export default function EnhancedVideoComparison({
             <button
               onClick={toggleSync}
               className={cn(
-                "text-white transition-colors",
-                isSynced ? "text-amber-400 hover:text-white" : "hover:text-amber-400",
+                "text-primary-foreground transition-colors", // text-white -> text-primary-foreground
+                isSynced ? "text-chart-5 hover:text-primary-foreground" : "hover:text-chart-5", // text-amber-400 hover:text-white -> text-chart-5 hover:text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               )}
               aria-label={isSynced ? "Unsync videos" : "Sync videos"}
               title={isSynced ? "Unsync videos" : "Sync videos"}
@@ -556,7 +556,7 @@ export default function EnhancedVideoComparison({
             {/* Swap Videos */}
             <button
               onClick={swapVideos}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label="Swap videos"
               title="Swap videos"
             >
@@ -566,7 +566,7 @@ export default function EnhancedVideoComparison({
             {/* Fullscreen Toggle */}
             <button
               onClick={toggleFullscreen}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
             >
               {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}

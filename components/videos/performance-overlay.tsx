@@ -106,13 +106,13 @@ export default function PerformanceOverlay({
     <div className={cn("absolute inset-0 pointer-events-none", className)}>
       {/* Performance Data Display */}
       <div className="absolute top-4 right-4">
-        <div className="bg-black/70 rounded px-3 py-2 backdrop-blur-sm max-w-xs">
+        <div className="bg-background/85 rounded px-3 py-2 backdrop-blur-sm max-w-xs"> {/* bg-black/70 -> bg-background/85 */}
           {/* Header with athlete names when in comparison mode */}
           {showComparison && comparisonData && (
-            <div className="flex justify-between items-center mb-2 border-b border-white/20 pb-1">
-              <span className="text-white text-xs font-medium">{athleteName}</span>
-              <span className="text-white/70 text-xs">vs</span>
-              <span className="text-white text-xs font-medium">{comparisonName}</span>
+            <div className="flex justify-between items-center mb-2 border-b border-primary-foreground/20 pb-1"> {/* border-white/20 -> border-primary-foreground/20 */}
+              <span className="text-primary-foreground text-xs font-medium">{athleteName}</span> {/* text-white -> text-primary-foreground */}
+              <span className="text-primary-foreground/70 text-xs">vs</span> {/* text-white/70 -> text-primary-foreground/70 */}
+              <span className="text-primary-foreground text-xs font-medium">{comparisonName}</span> {/* text-white -> text-primary-foreground */}
             </div>
           )}
 
@@ -144,17 +144,17 @@ export default function PerformanceOverlay({
             return (
               <div key={index} className="flex items-center justify-between gap-2 mb-2">
                 <div className="flex-1">
-                  <div className="text-white text-xs font-medium mb-0.5">{data.uebung}</div>
+                  <div className="text-primary-foreground text-xs font-medium mb-0.5">{data.uebung}</div> {/* text-white -> text-primary-foreground */}
                   <div className="flex items-baseline gap-1">
-                    <span className="text-amber-400 text-sm font-medium">{result}</span>
-                    {unit && <span className="text-white/70 text-xs">{unit}</span>}
+                    <span className="text-chart-5 text-sm font-medium">{result}</span> {/* text-amber-400 -> text-chart-5 */}
+                    {unit && <span className="text-primary-foreground/70 text-xs">{unit}</span>} {/* text-white/70 -> text-primary-foreground/70 */}
                   </div>
                 </div>
 
                 {/* Show comparison with other athlete if available */}
                 {showComparison && comparisonResult !== undefined && (
                   <div className="flex flex-col items-end">
-                    <span className="text-white/80 text-xs mb-0.5">
+                    <span className="text-primary-foreground/80 text-xs mb-0.5"> {/* text-white/80 -> text-primary-foreground/80 */}
                       {typeof comparisonResult === "string" ? comparisonResult : comparisonResult.toFixed(2)}
                       {unit}
                     </span>
@@ -163,7 +163,7 @@ export default function PerformanceOverlay({
                       <div
                         className={cn(
                           "flex items-center gap-0.5 px-1.5 py-0.5 rounded text-xs font-medium",
-                          comparison.isImprovement ? "bg-green-900/40 text-green-400" : "bg-red-900/40 text-red-400",
+                          comparison.isImprovement ? "bg-chart-2/20 text-chart-2" : "bg-destructive/20 text-destructive", // bg-green-900/40 text-green-400 -> bg-chart-2/20 text-chart-2, bg-red-900/40 text-red-400 -> bg-destructive/20 text-destructive
                         )}
                       >
                         {comparison.isImprovement ? (
@@ -182,7 +182,7 @@ export default function PerformanceOverlay({
                   <div
                     className={cn(
                       "flex items-center gap-0.5 px-1.5 py-0.5 rounded text-xs font-medium",
-                      isBenchmarkImprovement ? "bg-green-900/40 text-green-400" : "bg-red-900/40 text-red-400",
+                      isBenchmarkImprovement ? "bg-chart-2/20 text-chart-2" : "bg-destructive/20 text-destructive", // bg-green-900/40 text-green-400 -> bg-chart-2/20 text-chart-2, bg-red-900/40 text-red-400 -> bg-destructive/20 text-destructive
                     )}
                   >
                     {isBenchmarkImprovement ? (
@@ -198,7 +198,7 @@ export default function PerformanceOverlay({
           })}
 
           {/* Footer with explanation */}
-          <div className="mt-2 pt-1 border-t border-white/20 text-[10px] text-white/50">
+          <div className="mt-2 pt-1 border-t border-primary-foreground/20 text-[10px] text-primary-foreground/50"> {/* border-white/20 -> border-primary-foreground/20, text-white/50 -> text-primary-foreground/50 */}
             {showComparison ? `Comparing ${athleteName} to ${comparisonName}` : "Compared to DFB-50 benchmark"}
           </div>
         </div>

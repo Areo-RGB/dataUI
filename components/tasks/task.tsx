@@ -27,7 +27,7 @@ export default function Task() {
                 In Progress
               </TabsTrigger>
               <TabsTrigger value="completed" className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <CheckCircle2 className="w-4 h-4 text-chart-2" /> 
                 Completed
               </TabsTrigger>
             </TabsList>

@@ -9,9 +9,8 @@ module.exports = {
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ["var(--font-geist-sans)"],
+    fontFamily: {
+      sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
         serif: ["Georgia", "serif"],
       },
@@ -81,7 +80,6 @@ module.exports = {
         xl: "var(--shadow-xl)",
         "2xl": "var(--shadow-2xl)",
       },
-    },
   },
   plugins: [require("tailwindcss-animate")],
 }

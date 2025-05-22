@@ -44,7 +44,7 @@ export default function Sidebar() {
         className="lg:hidden fixed top-4 left-4 z-[70] p-2 rounded-lg bg-sidebar shadow-md hover:bg-sidebar-accent transition-colors duration-200"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
-        <Menu className="h-5 w-5 text-foreground" />
+         <Menu className="h-5 w-5 text-sidebar-foreground" />
       </button>
       <nav
         className={`

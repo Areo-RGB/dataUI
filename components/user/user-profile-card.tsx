@@ -65,7 +65,7 @@ export default function UserProfileCard({
                 height={72}
                 className="rounded-full ring-4 ring-background object-cover"
               />
-              <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-emerald-500 ring-2 ring-background" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-chart-2 ring-2 ring-background" /> 
             </div>
 
             {/* Profile Info */}

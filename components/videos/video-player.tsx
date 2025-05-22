@@ -276,22 +276,22 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
 
       {/* Loading Indicator */}
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-          <div className="w-12 h-12 rounded-full border-4 border-zinc-300 border-t-zinc-600 animate-spin"></div>
+        <div className="absolute inset-0 flex items-center justify-center bg-background/30"> {/* bg-black/30 -> bg-background/30 */}
+          <div className="w-12 h-12 rounded-full border-4 border-muted/50 border-t-chart-5 animate-spin"></div> {/* border-zinc-300 -> border-muted/50, border-t-zinc-600 -> border-t-chart-5 */}
         </div>
       )}
 
       {/* Video Title */}
       {title && showControls && (
-        <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/70 to-transparent">
-          <h3 className="text-white font-medium truncate">{title}</h3>
+        <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-background/70 to-transparent"> {/* from-black/70 -> from-background/70 */}
+          <h3 className="text-primary-foreground font-medium truncate">{title}</h3> {/* text-white -> text-primary-foreground */}
         </div>
       )}
 
       {/* Video Controls */}
       <div
         className={cn(
-          "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 transition-opacity duration-300",
+          "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/70 to-transparent p-4 transition-opacity duration-300", // from-black/70 -> from-background/70
           showControls ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
       >
@@ -303,9 +303,9 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             max={duration || 100}
             value={currentTime}
             onChange={handleSeek}
-            className="w-full h-1.5 rounded-full bg-zinc-600 appearance-none cursor-pointer"
+            className="w-full h-1.5 rounded-full bg-muted appearance-none cursor-pointer" // bg-zinc-600 -> bg-muted
             style={{
-              backgroundImage: `linear-gradient(to right, #f59e0b ${(currentTime / (duration || 1)) * 100}%, #52525b ${
+              backgroundImage: `linear-gradient(to right, hsl(var(--chart-5)) ${(currentTime / (duration || 1)) * 100}%, hsl(var(--muted)) ${ // #f59e0b -> hsl(var(--chart-5)), #52525b -> hsl(var(--muted))
                 (currentTime / (duration || 1)) * 100
               }%)`,
             }}
@@ -318,7 +318,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             {/* Play/Pause */}
             <button
               onClick={togglePlay}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label={isPlaying ? "Pause" : "Play"}
             >
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -328,7 +328,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             <div className="flex items-center space-x-1">
               <button
                 onClick={prevFrame}
-                className="text-white hover:text-amber-400 transition-colors"
+                className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
                 aria-label="Previous frame"
                 title="Previous frame"
               >
@@ -336,7 +336,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
               </button>
               <button
                 onClick={nextFrame}
-                className="text-white hover:text-amber-400 transition-colors"
+                className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
                 aria-label="Next frame"
                 title="Next frame"
               >
@@ -347,7 +347,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             {/* Restart */}
             <button
               onClick={restart}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label="Restart"
             >
               <RotateCcw className="w-4 h-4" />
@@ -356,7 +356,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             {/* Skip Backward */}
             <button
               onClick={() => skip(-10)}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label="Skip backward 10 seconds"
             >
               <SkipBack className="w-4 h-4" />
@@ -365,7 +365,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             {/* Skip Forward */}
             <button
               onClick={() => skip(10)}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label="Skip forward 10 seconds"
             >
               <SkipForward className="w-4 h-4" />
@@ -377,7 +377,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
                 onClick={() => changePlaybackSpeed(0.25)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 0.25 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 0.25 ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50", // bg-amber-500 text-black -> bg-chart-5 text-primary-foreground, text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50
                 )}
                 aria-label="0.25x speed"
                 title="0.25x speed"
@@ -388,7 +388,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
                 onClick={() => changePlaybackSpeed(0.5)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 0.5 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 0.5 ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50",
                 )}
                 aria-label="0.5x speed"
                 title="0.5x speed"
@@ -399,7 +399,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
                 onClick={() => changePlaybackSpeed(1)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 1 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 1 ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50",
                 )}
                 aria-label="1x speed"
                 title="1x speed"
@@ -412,7 +412,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             <div className="flex items-center space-x-1">
               <button
                 onClick={toggleMute}
-                className="text-white hover:text-amber-400 transition-colors"
+                className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
                 aria-label={isMuted ? "Unmute" : "Mute"}
               >
                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -424,29 +424,29 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
                 step={0.1}
                 value={volume}
                 onChange={handleVolumeChange}
-                className="w-16 h-1 rounded-full bg-zinc-600 appearance-none cursor-pointer"
+                className="w-16 h-1 rounded-full bg-muted appearance-none cursor-pointer" // bg-zinc-600 -> bg-muted
                 style={{
-                  backgroundImage: `linear-gradient(to right, #f59e0b ${volume * 100}%, #52525b ${volume * 100}%)`,
+                  backgroundImage: `linear-gradient(to right, hsl(var(--chart-5)) ${volume * 100}%, hsl(var(--muted)) ${volume * 100}%)`, // #f59e0b -> hsl(var(--chart-5)), #52525b -> hsl(var(--muted))
                 }}
               />
             </div>
 
             {/* Time Display */}
-            <div className="text-white text-xs">
+            <div className="text-primary-foreground text-xs"> {/* text-white -> text-primary-foreground */}
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
           </div>
 
           <div className="flex items-center space-x-3">
             {/* Settings Button */}
-            <button className="text-white hover:text-amber-400 transition-colors" aria-label="Settings">
+            <button className="text-primary-foreground hover:text-chart-5 transition-colors" aria-label="Settings"> {/* text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5 */}
               <Settings className="w-4 h-4" />
             </button>
 
             {/* Fullscreen Toggle */}
             <button
               onClick={toggleFullscreen}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-primary-foreground hover:text-chart-5 transition-colors" // text-white -> text-primary-foreground, hover:text-amber-400 -> hover:text-chart-5
               aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
             >
               {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}

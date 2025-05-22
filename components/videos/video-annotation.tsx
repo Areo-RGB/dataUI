@@ -306,17 +306,17 @@ export default function VideoAnnotation({ videoRef, width, height, className, on
 
       {/* Text input overlay */}
       {isAddingText && textPosition && (
-        <div className="absolute z-20 bg-black/80 p-2 rounded" style={{ top: textPosition.y, left: textPosition.x }}>
+        <div className="absolute z-20 bg-background/80 p-2 rounded" style={{ top: textPosition.y, left: textPosition.x }}> {/* bg-black/80 -> bg-background/80 */}
           <input
             type="text"
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
-            className="bg-transparent border border-white/30 text-white px-2 py-1 text-sm rounded"
+            className="bg-transparent border border-primary-foreground/30 text-primary-foreground px-2 py-1 text-sm rounded" // border-white/30 -> border-primary-foreground/30, text-white -> text-primary-foreground
             placeholder="Enter text..."
             autoFocus
           />
           <div className="flex mt-1 gap-1">
-            <button onClick={handleTextSubmit} className="bg-amber-500 text-black px-2 py-0.5 text-xs rounded">
+            <button onClick={handleTextSubmit} className="bg-chart-5 text-primary-foreground px-2 py-0.5 text-xs rounded"> {/* bg-amber-500 text-black -> bg-chart-5 text-primary-foreground */}
               Add
             </button>
             <button
@@ -325,7 +325,7 @@ export default function VideoAnnotation({ videoRef, width, height, className, on
                 setTextInput("")
                 setTextPosition(null)
               }}
-              className="bg-zinc-600 text-white px-2 py-0.5 text-xs rounded"
+              className="bg-muted text-muted-foreground px-2 py-0.5 text-xs rounded" // bg-zinc-600 text-white -> bg-muted text-muted-foreground
             >
               Cancel
             </button>
@@ -334,12 +334,12 @@ export default function VideoAnnotation({ videoRef, width, height, className, on
       )}
 
       {/* Annotation toolbar */}
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 bg-black/80 rounded-lg p-1 z-20 flex items-center gap-1">
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 bg-background/80 rounded-lg p-1 z-20 flex items-center gap-1"> {/* bg-black/80 -> bg-background/80 */}
         <button
           onClick={() => setSelectedTool("pencil")}
           className={cn(
             "p-1.5 rounded",
-            selectedTool === "pencil" ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+            selectedTool === "pencil" ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50", // bg-amber-500 text-black -> bg-chart-5 text-primary-foreground, text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50
           )}
           title="Pencil"
         >
@@ -349,7 +349,7 @@ export default function VideoAnnotation({ videoRef, width, height, className, on
           onClick={() => setSelectedTool("circle")}
           className={cn(
             "p-1.5 rounded",
-            selectedTool === "circle" ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+            selectedTool === "circle" ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50",
           )}
           title="Circle"
         >
@@ -359,7 +359,7 @@ export default function VideoAnnotation({ videoRef, width, height, className, on
           onClick={() => setSelectedTool("arrow")}
           className={cn(
             "p-1.5 rounded",
-            selectedTool === "arrow" ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+            selectedTool === "arrow" ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50",
           )}
           title="Arrow"
         >
@@ -369,14 +369,14 @@ export default function VideoAnnotation({ videoRef, width, height, className, on
           onClick={() => setSelectedTool("text")}
           className={cn(
             "p-1.5 rounded",
-            selectedTool === "text" ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+            selectedTool === "text" ? "bg-chart-5 text-primary-foreground" : "text-primary-foreground hover:bg-muted/50",
           )}
           title="Text"
         >
           <Type className="w-4 h-4" />
         </button>
 
-        <div className="w-px h-6 bg-zinc-600 mx-1" />
+        <div className="w-px h-6 bg-border mx-1" /> {/* bg-zinc-600 -> bg-border */}
 
         <input
           type="color"
@@ -386,11 +386,11 @@ export default function VideoAnnotation({ videoRef, width, height, className, on
           title="Color"
         />
 
-        <div className="w-px h-6 bg-zinc-600 mx-1" />
+        <div className="w-px h-6 bg-border mx-1" /> {/* bg-zinc-600 -> bg-border */}
 
         <button
           onClick={handleUndo}
-          className="p-1.5 rounded text-white hover:bg-zinc-700"
+          className="p-1.5 rounded text-primary-foreground hover:bg-muted/50" // text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50
           title="Undo"
           disabled={annotations.length === 0}
         >
@@ -398,26 +398,26 @@ export default function VideoAnnotation({ videoRef, width, height, className, on
         </button>
         <button
           onClick={handleClear}
-          className="p-1.5 rounded text-white hover:bg-zinc-700"
+          className="p-1.5 rounded text-primary-foreground hover:bg-muted/50" // text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50
           title="Clear all"
           disabled={annotations.length === 0}
         >
           <Trash2 className="w-4 h-4" />
         </button>
 
-        <div className="w-px h-6 bg-zinc-600 mx-1" />
+        <div className="w-px h-6 bg-border mx-1" /> {/* bg-zinc-600 -> bg-border */}
 
         <button
           onClick={() => setShowAnnotations(!showAnnotations)}
-          className="p-1.5 rounded text-white hover:bg-zinc-700"
+          className="p-1.5 rounded text-primary-foreground hover:bg-muted/50" // text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50
           title={showAnnotations ? "Hide annotations" : "Show annotations"}
         >
           {showAnnotations ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
         </button>
-        <button onClick={handleSave} className="p-1.5 rounded text-white hover:bg-zinc-700" title="Save annotations">
+        <button onClick={handleSave} className="p-1.5 rounded text-primary-foreground hover:bg-muted/50" title="Save annotations"> {/* text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50 */}
           <Save className="w-4 h-4" />
         </button>
-        <button onClick={handleExport} className="p-1.5 rounded text-white hover:bg-zinc-700" title="Export as image">
+        <button onClick={handleExport} className="p-1.5 rounded text-primary-foreground hover:bg-muted/50" title="Export as image"> {/* text-white hover:bg-zinc-700 -> text-primary-foreground hover:bg-muted/50 */}
           <Download className="w-4 h-4" />
         </button>
       </div>

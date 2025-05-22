@@ -34,14 +34,14 @@ export default function VideoAnnotationOverlay({ videoUrl, currentTime, classNam
         const customStyles = annotation.style || {}
         const combinedStyles = {
           ...positionStyles,
-          color: customStyles.color || "#ffffff",
-          backgroundColor: customStyles.backgroundColor || "rgba(0, 0, 0, 0.7)",
+          color: customStyles.color || 'hsl(var(--primary-foreground))',
+          backgroundColor: customStyles.backgroundColor || 'hsla(var(--background), 0.7)',
           fontSize: customStyles.fontSize ? `${customStyles.fontSize}px` : "16px",
           fontWeight: customStyles.fontWeight || "normal",
-          padding: "8px 12px",
-          borderRadius: "4px",
+          padding: "8px 12px", // Kept as inline style for consistency
+          borderRadius: "calc(var(--radius) - 4px)", // Equivalent to rounded-sm
           maxWidth: "80%",
-          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+          boxShadow: 'var(--shadow-sm)', // Using theme shadow variable
         }
 
         return (

@@ -22,8 +22,8 @@ const statusConfig: StatusConfigMap = {
   },
   completed: {
     icon: CheckCircle2,
-    class: "text-emerald-500",
-    bg: "bg-emerald-500/10",
+    class: "text-chart-2", // Was text-emerald-500
+    bg: "bg-chart-2/10",   // Was bg-emerald-500/10
   },
 }
 
@@ -117,7 +117,7 @@ export default function FinancialGoalList({ items = ITEMS, className }: Financia
                           ? "bg-chart-1"
                           : item.status === "in-progress"
                             ? "bg-chart-2"
-                            : "bg-emerald-500",
+                            : "bg-chart-2", // Was bg-emerald-500
                       )}
                       style={{ width: `${item.progress}%` }}
                     />

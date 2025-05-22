@@ -36,11 +36,11 @@ export default function PerformanceRanking({
 
   // Generate gradient legend items with performance categories
   const gradientLegendItems = [
-    { category: "unterdurchschnittlich", color: "bg-red-600/60", percentileRange: "3-30%" },
-    { category: "durchschnittlich", color: "bg-orange-500/60", percentileRange: "31-70%" },
-    { category: "gut", color: "bg-yellow-500/60", percentileRange: "71-80%" },
-    { category: "sehr gut", color: "bg-green-500/60", percentileRange: "81-90%" },
-    { category: "ausgezeichnet", color: "bg-green-600/60", percentileRange: "91-97%" },
+    { category: "unterdurchschnittlich", color: "bg-destructive/60", percentileRange: "3-30%" },
+    { category: "durchschnittlich", color: "bg-chart-3/60", percentileRange: "31-70%" }, // Was orange-500, now chart-3 (orange)
+    { category: "gut", color: "bg-chart-4/60", percentileRange: "71-80%" }, // Was yellow-500, now chart-4 (purple)
+    { category: "sehr gut", color: "bg-chart-1/60", percentileRange: "81-90%" }, // Was green-500, now chart-1 (blue)
+    { category: "ausgezeichnet", color: "bg-chart-2/60", percentileRange: "91-97%" }, // Was green-600, now chart-2 (green)
   ]
 
   return (
@@ -74,21 +74,21 @@ export default function PerformanceRanking({
           />
 
           {/* Title bar at the top */}
-          <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/70 to-transparent z-10">
-            <h2 className="text-sm font-semibold text-white flex items-center">
+          <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-background/85 to-transparent z-10">
+            <h2 className="text-sm font-semibold text-primary-foreground flex items-center">
               <span className="w-1.5 h-1.5 rounded-full bg-chart-2 mr-2"></span>
               {displayTitle || title}
             </h2>
           </div>
 
           {/* Image caption overlay at the bottom */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent z-10">
-            <p className="text-white text-sm font-medium">{title} Technique Demonstration</p>
-            <p className="text-white/80 text-xs mt-1">Tap to view rankings</p>
+          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background/85 to-transparent z-10">
+            <p className="text-primary-foreground text-sm font-medium">{title} Technique Demonstration</p>
+            <p className="text-primary-foreground/80 text-xs mt-1">Tap to view rankings</p>
           </div>
 
           {/* Tap to close hint */}
-          <div className="absolute top-4 right-4 bg-black/40 rounded-full p-1.5 text-white/80 text-xs flex items-center gap-1 z-20">
+          <div className="absolute top-4 right-4 bg-background/50 rounded-full p-1.5 text-primary-foreground/80 text-xs flex items-center gap-1 z-20">
             <X className="w-3 h-3" />
             <span className="hidden sm:inline">Close</span>
           </div>
@@ -128,7 +128,7 @@ export default function PerformanceRanking({
             <div className="mb-4 p-3 bg-muted/50 rounded-lg text-xs border border-border/50 animate-in slide-in-from-top duration-300">
               <div className="font-medium mb-2 text-card-foreground">Leistungskategorien:</div>
               <div className="flex items-center mb-3">
-                <div className="h-4 flex-1 bg-gradient-to-r from-red-600/60 via-orange-500/60 to-green-600/60 rounded-sm"></div>
+                <div className="h-4 flex-1 bg-gradient-to-r from-destructive/60 via-chart-3/60 to-chart-2/60 rounded-sm"></div>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-3 gap-y-2">
                 {gradientLegendItems.map((item) => (
@@ -159,11 +159,11 @@ export default function PerformanceRanking({
               // Determine border color based on percentile
               let borderColorClass = "border-muted-foreground/40"
               if (!isBenchmark) {
-                if (percentile < 31) borderColorClass = "border-red-600/60"
-                else if (percentile < 71) borderColorClass = "border-orange-500/60"
-                else if (percentile < 81) borderColorClass = "border-yellow-500/60"
-                else if (percentile < 91) borderColorClass = "border-green-500/60"
-                else borderColorClass = "border-green-600/60"
+                if (percentile < 31) borderColorClass = "border-destructive/60"        // Was border-red-600/60
+                else if (percentile < 71) borderColorClass = "border-chart-3/60"   // Was border-orange-500/60
+                else if (percentile < 81) borderColorClass = "border-chart-4/60"   // Was border-yellow-500/60
+                else if (percentile < 91) borderColorClass = "border-chart-1/60"   // Was border-green-500/60
+                else borderColorClass = "border-chart-2/60"        // Was border-green-600/60
               }
 
               return (
