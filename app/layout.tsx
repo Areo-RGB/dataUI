@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={cn(poppins.variable, lexend.variable)}>
+    <html lang="en" className={cn("dark", poppins.variable, lexend.variable)}>
       <head>
         <meta name="application-name" content="Finley Dashboard" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
