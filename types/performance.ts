@@ -35,6 +35,7 @@ export interface PerformanceRankingProps {
   className?: string
   unit?: string
   sortAscending?: boolean
+  initialCollapsed?: boolean // Whether the component should start collapsed
 }
 
 /**

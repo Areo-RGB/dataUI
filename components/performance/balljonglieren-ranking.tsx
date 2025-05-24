@@ -1,7 +1,7 @@
 import { getExerciseData } from "@/lib/data"
 import PerformanceRanking from "@/components/performance/performance-ranking" // Maintain absolute import path
 
-export default function BalljonglierenRanking({ className }: { className?: string }) {
+export default function BalljonglierenRanking({ className, initialCollapsed }: { className?: string, initialCollapsed?: boolean }) {
   const data = getExerciseData("Balljonglieren")
 
   return (
@@ -12,6 +12,7 @@ export default function BalljonglierenRanking({ className }: { className?: strin
       className={className}
       unit="Punkte" // Using appropriate unit for this exercise
       sortAscending={false}
+      initialCollapsed={initialCollapsed}
     />
   )
 }

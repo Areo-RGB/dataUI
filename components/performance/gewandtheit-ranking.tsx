@@ -1,7 +1,7 @@
 import { getExerciseData } from "@/lib/data"
 import PerformanceRanking from "@/components/performance/performance-ranking" // Maintain absolute import path
 
-export default function GewandtheitRanking({ className }: { className?: string }) {
+export default function GewandtheitRanking({ className, initialCollapsed }: { className?: string, initialCollapsed?: boolean }) {
   const data = getExerciseData("Gewandtheit")
 
   return (
@@ -12,6 +12,7 @@ export default function GewandtheitRanking({ className }: { className?: string }
       className={className}
       unit="s"
       sortAscending={true}
+      initialCollapsed={initialCollapsed}
     />
   )
 }

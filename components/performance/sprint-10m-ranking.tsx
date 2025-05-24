@@ -1,7 +1,7 @@
 import { getExerciseData } from "@/lib/data"
 import PerformanceRanking from "@/components/performance/performance-ranking" // Maintain absolute import path
 
-export default function Sprint10mRanking({ className }: { className?: string }) {
+export default function Sprint10mRanking({ className, initialCollapsed }: { className?: string, initialCollapsed?: boolean }) {
   const data = getExerciseData("10m Sprint")
 
   return (
@@ -12,6 +12,7 @@ export default function Sprint10mRanking({ className }: { className?: string }) 
       className={className}
       unit="s"
       sortAscending={true}
+      initialCollapsed={initialCollapsed}
     />
   )
 }
