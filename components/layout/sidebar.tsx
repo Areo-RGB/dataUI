@@ -81,9 +81,6 @@ export default function Sidebar() {
                   <NavItem href="/dashboard" icon={Home}>
                     Dashboard
                   </NavItem>
-                  <NavItem href="/task" icon={ClipboardList}>
-                    Task
-                  </NavItem>
                 </div>
               </div>
             </div>
@@ -99,7 +96,7 @@ export default function Sidebar() {
 
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[65] lg:hidden transition-opacity duration-300"
+          className="fixed inset-0 bg-base-1000 bg-opacity-50 backdrop-blur-sm z-[65] lg:hidden transition-opacity duration-300"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}

@@ -164,14 +164,14 @@ const VideoJsPlayer: React.FC<VideoJsPlayerProps> = ({ src, poster, className, o
   return (
     <div
       className={cn(
-        "absolute inset-0 bg-black/90 flex items-center justify-center z-20 p-2 rounded-xl overflow-hidden",
+        "absolute inset-0 bg-base-1000/90 flex items-center justify-center z-20 p-2 rounded-xl overflow-hidden",
         className,
       )}
     >
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-2 right-2 p-1.5 bg-black/60 text-white rounded-full hover:bg-black/80 transition-colors z-30"
+        className="absolute top-2 right-2 p-1.5 bg-base-1000/60 text-base-100 rounded-full hover:bg-base-1000/80 transition-colors z-30"
         aria-label="Close video"
       >
         <X size={20} />
@@ -179,7 +179,7 @@ const VideoJsPlayer: React.FC<VideoJsPlayerProps> = ({ src, poster, className, o
 
       {/* Loading State */}
       {isLoading && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-base-100 z-10">
           <Loader2 className="w-10 h-10 animate-spin mb-3" />
           <p className="text-sm">Loading video...</p>
         </div>
@@ -187,10 +187,10 @@ const VideoJsPlayer: React.FC<VideoJsPlayerProps> = ({ src, poster, className, o
 
       {/* Error State */}
       {error && !isLoading && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4 z-10">
-          <AlertCircle className="w-12 h-12 text-red-500 mb-3" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-base-100 p-4 z-10">
+          <AlertCircle className="w-12 h-12 text-destructive mb-3" />
           <p className="mb-4 text-sm font-medium">Could not load video</p>
-          <p className="text-xs text-gray-300 max-w-xs">{error}</p>
+          <p className="text-xs text-base-300 max-w-xs">{error}</p>
         </div>
       )}
 

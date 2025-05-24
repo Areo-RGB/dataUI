@@ -254,7 +254,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
     <div
       ref={videoContainerRef}
       className={cn(
-        "relative group overflow-hidden rounded-xl bg-black",
+        "relative group overflow-hidden rounded-xl bg-base-950",
         isFullscreen ? "fixed inset-0 z-50" : "w-full aspect-video",
         className,
       )}
@@ -276,22 +276,22 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
 
       {/* Loading Indicator */}
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-          <div className="w-12 h-12 rounded-full border-4 border-zinc-300 border-t-zinc-600 animate-spin"></div>
+        <div className="absolute inset-0 flex items-center justify-center bg-base-1000/30">
+          <div className="w-12 h-12 rounded-full border-4 border-base-300 border-t-base-600 animate-spin"></div>
         </div>
       )}
 
       {/* Video Title */}
       {title && showControls && (
-        <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/70 to-transparent">
-          <h3 className="text-white font-medium truncate">{title}</h3>
+        <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-base-1000/70 to-transparent">
+          <h3 className="text-base-100 font-medium truncate">{title}</h3>
         </div>
       )}
 
       {/* Video Controls */}
       <div
         className={cn(
-          "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 transition-opacity duration-300",
+          "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-base-1000/70 to-transparent p-4 transition-opacity duration-300",
           showControls ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
       >
@@ -303,7 +303,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             max={duration || 100}
             value={currentTime}
             onChange={handleSeek}
-            className="w-full h-1.5 rounded-full bg-zinc-600 appearance-none cursor-pointer"
+            className="w-full h-1.5 rounded-full bg-base-800 appearance-none cursor-pointer"
             style={{
               backgroundImage: `linear-gradient(to right, #f59e0b ${(currentTime / (duration || 1)) * 100}%, #52525b ${
                 (currentTime / (duration || 1)) * 100
@@ -318,7 +318,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             {/* Play/Pause */}
             <button
               onClick={togglePlay}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-base-100 hover:text-amber-400 transition-colors"
               aria-label={isPlaying ? "Pause" : "Play"}
             >
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -328,7 +328,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             <div className="flex items-center space-x-1">
               <button
                 onClick={prevFrame}
-                className="text-white hover:text-amber-400 transition-colors"
+                className="text-base-100 hover:text-amber-400 transition-colors"
                 aria-label="Previous frame"
                 title="Previous frame"
               >
@@ -336,7 +336,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
               </button>
               <button
                 onClick={nextFrame}
-                className="text-white hover:text-amber-400 transition-colors"
+                className="text-base-100 hover:text-amber-400 transition-colors"
                 aria-label="Next frame"
                 title="Next frame"
               >
@@ -347,7 +347,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             {/* Restart */}
             <button
               onClick={restart}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-base-100 hover:text-amber-400 transition-colors"
               aria-label="Restart"
             >
               <RotateCcw className="w-4 h-4" />
@@ -356,7 +356,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             {/* Skip Backward */}
             <button
               onClick={() => skip(-10)}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-base-100 hover:text-amber-400 transition-colors"
               aria-label="Skip backward 10 seconds"
             >
               <SkipBack className="w-4 h-4" />
@@ -365,7 +365,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             {/* Skip Forward */}
             <button
               onClick={() => skip(10)}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-base-100 hover:text-amber-400 transition-colors"
               aria-label="Skip forward 10 seconds"
             >
               <SkipForward className="w-4 h-4" />
@@ -377,7 +377,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
                 onClick={() => changePlaybackSpeed(0.25)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 0.25 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 0.25 ? "bg-amber-500 text-black" : "text-base-100 hover:bg-base-700",
                 )}
                 aria-label="0.25x speed"
                 title="0.25x speed"
@@ -388,7 +388,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
                 onClick={() => changePlaybackSpeed(0.5)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 0.5 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 0.5 ? "bg-amber-500 text-black" : "text-base-100 hover:bg-base-700",
                 )}
                 aria-label="0.5x speed"
                 title="0.5x speed"
@@ -399,7 +399,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
                 onClick={() => changePlaybackSpeed(1)}
                 className={cn(
                   "px-1.5 py-0.5 text-xs rounded",
-                  playbackSpeed === 1 ? "bg-amber-500 text-black" : "text-white hover:bg-zinc-700",
+                  playbackSpeed === 1 ? "bg-amber-500 text-black" : "text-base-100 hover:bg-base-700",
                 )}
                 aria-label="1x speed"
                 title="1x speed"
@@ -412,7 +412,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             <div className="flex items-center space-x-1">
               <button
                 onClick={toggleMute}
-                className="text-white hover:text-amber-400 transition-colors"
+                className="text-base-100 hover:text-amber-400 transition-colors"
                 aria-label={isMuted ? "Unmute" : "Mute"}
               >
                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -424,7 +424,7 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
                 step={0.1}
                 value={volume}
                 onChange={handleVolumeChange}
-                className="w-16 h-1 rounded-full bg-zinc-600 appearance-none cursor-pointer"
+                className="w-16 h-1 rounded-full bg-base-800 appearance-none cursor-pointer"
                 style={{
                   backgroundImage: `linear-gradient(to right, #f59e0b ${volume * 100}%, #52525b ${volume * 100}%)`,
                 }}
@@ -432,21 +432,21 @@ export default function VideoPlayer({ src, title, className, poster, autoPlay = 
             </div>
 
             {/* Time Display */}
-            <div className="text-white text-xs">
+            <div className="text-base-100 text-xs">
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
           </div>
 
           <div className="flex items-center space-x-3">
             {/* Settings Button */}
-            <button className="text-white hover:text-amber-400 transition-colors" aria-label="Settings">
+            <button className="text-base-100 hover:text-amber-400 transition-colors" aria-label="Settings">
               <Settings className="w-4 h-4" />
             </button>
 
             {/* Fullscreen Toggle */}
             <button
               onClick={toggleFullscreen}
-              className="text-white hover:text-amber-400 transition-colors"
+              className="text-base-100 hover:text-amber-400 transition-colors"
               aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
             >
               {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}

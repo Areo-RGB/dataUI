@@ -47,8 +47,7 @@ export default function PerformanceRanking({
     <div
       className={cn(
         "w-full max-w-xl mx-auto",
-        "bg-card rounded-xl border border-border",
-        "shadow-md",
+        "card-enhanced",
         "relative",
         "overflow-hidden",
         "transition-all duration-300",
@@ -74,21 +73,21 @@ export default function PerformanceRanking({
           />
 
           {/* Title bar at the top */}
-          <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/70 to-transparent z-10">
-            <h2 className="text-sm font-semibold text-white flex items-center">
+          <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-base-1000/70 to-transparent z-10">
+            <h2 className="text-sm font-semibold text-base-100 flex items-center">
               <span className="w-1.5 h-1.5 rounded-full bg-chart-2 mr-2"></span>
               {displayTitle || title}
             </h2>
           </div>
 
           {/* Image caption overlay at the bottom */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent z-10">
-            <p className="text-white text-sm font-medium">{title} Technique Demonstration</p>
-            <p className="text-white/80 text-xs mt-1">Tap to view rankings</p>
+          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-base-1000/70 to-transparent z-10">
+            <p className="text-base-100 text-sm font-medium">{title} Technique Demonstration</p>
+            <p className="text-base-100/80 text-xs mt-1">Tap to view rankings</p>
           </div>
 
           {/* Tap to close hint */}
-          <div className="absolute top-4 right-4 bg-black/40 rounded-full p-1.5 text-white/80 text-xs flex items-center gap-1 z-20">
+          <div className="absolute top-4 right-4 bg-base-1000/40 rounded-full p-1.5 text-base-100/80 text-xs flex items-center gap-1 z-20">
             <X className="w-3 h-3" />
             <span className="hidden sm:inline">Close</span>
           </div>
@@ -96,7 +95,7 @@ export default function PerformanceRanking({
       ) : (
         <div className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-card-foreground flex items-center">
+            <h2 className="text-sm font-semibold text-card-foreground flex items-center font-display">
               <span className="w-1.5 h-1.5 rounded-full bg-chart-2 mr-2"></span>
               {displayTitle || title}
             </h2>
@@ -158,8 +157,8 @@ export default function PerformanceRanking({
 
               // Determine border color based on percentile
               let borderColorClass = "border-muted-foreground/40"
-              if (!isBenchmark) {
-                if (percentile < 31) borderColorClass = "border-red-600/60"
+              if (!isBenchmark && percentile !== null) {
+                if (percentile < 31) borderColorClass = "border-destructive/60"
                 else if (percentile < 71) borderColorClass = "border-orange-500/60"
                 else if (percentile < 81) borderColorClass = "border-yellow-500/60"
                 else if (percentile < 91) borderColorClass = "border-green-500/60"
@@ -201,7 +200,7 @@ export default function PerformanceRanking({
 
                   <div className="flex-1 flex items-center justify-between min-w-0">
                     <div className="space-y-0.5">
-                      <h3 className="text-xs font-medium text-card-foreground">
+                      <h3 className="text-xs font-medium text-card-foreground font-display">
                         {item.name}
                         {isBenchmark && percentile && (
                           <span className="ml-1 text-[10px] text-muted-foreground">(P{percentile})</span>

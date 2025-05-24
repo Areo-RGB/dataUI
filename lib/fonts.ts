@@ -1,40 +1,15 @@
-import localFont from "next/font/local"
+import { Poppins, Lexend } from "next/font/google"
 
-// Load Geist Sans (Variable font)
-export const geistSans = localFont({
-  src: [
-    {
-      path: "../public/fonts/Geist-Variable.woff2",
-      style: "normal",
-    },
-  ],
-  variable: "--font-sans",
-})
+// Display font - Poppins
+export const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['600'],
+  variable: '--display-family',
+});
 
-// Load Geist Mono (Variable font)
-export const geistMono = localFont({
-  src: [
-    {
-      path: "../public/fonts/GeistMono-Variable.woff2",
-      style: "normal",
-    },
-  ],
-  variable: "--font-mono",
-})
-
-// Default serif font
-export const serif = localFont({
-  src: [
-    {
-      path: "../public/fonts/Georgia.woff2",
-      style: "normal",
-      weight: "400",
-    },
-    {
-      path: "../public/fonts/Georgia-Bold.woff2",
-      style: "normal",
-      weight: "700",
-    },
-  ],
-  variable: "--font-serif",
-})
+// Text font - Lexend
+export const lexend = Lexend({
+  subsets: ['latin'],
+  weight: ['300'],
+  variable: '--text-family',
+});

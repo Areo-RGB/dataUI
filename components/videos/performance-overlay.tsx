@@ -106,13 +106,13 @@ export default function PerformanceOverlay({
     <div className={cn("absolute inset-0 pointer-events-none", className)}>
       {/* Performance Data Display */}
       <div className="absolute top-4 right-4">
-        <div className="bg-black/70 rounded px-3 py-2 backdrop-blur-sm max-w-xs">
+        <div className="bg-base-1000/70 rounded px-3 py-2 backdrop-blur-sm max-w-xs">
           {/* Header with athlete names when in comparison mode */}
           {showComparison && comparisonData && (
-            <div className="flex justify-between items-center mb-2 border-b border-white/20 pb-1">
-              <span className="text-white text-xs font-medium">{athleteName}</span>
-              <span className="text-white/70 text-xs">vs</span>
-              <span className="text-white text-xs font-medium">{comparisonName}</span>
+            <div className="flex justify-between items-center mb-2 border-b border-base-100/20 pb-1">
+              <span className="text-base-100 text-xs font-medium">{athleteName}</span>
+              <span className="text-base-100/70 text-xs">vs</span>
+              <span className="text-base-100 text-xs font-medium">{comparisonName}</span>
             </div>
           )}
 
@@ -144,17 +144,17 @@ export default function PerformanceOverlay({
             return (
               <div key={index} className="flex items-center justify-between gap-2 mb-2">
                 <div className="flex-1">
-                  <div className="text-white text-xs font-medium mb-0.5">{data.uebung}</div>
+                  <div className="text-base-100 text-xs font-medium mb-0.5">{data.uebung}</div>
                   <div className="flex items-baseline gap-1">
                     <span className="text-amber-400 text-sm font-medium">{result}</span>
-                    {unit && <span className="text-white/70 text-xs">{unit}</span>}
+                    {unit && <span className="text-base-100/70 text-xs">{unit}</span>}
                   </div>
                 </div>
 
                 {/* Show comparison with other athlete if available */}
                 {showComparison && comparisonResult !== undefined && (
                   <div className="flex flex-col items-end">
-                    <span className="text-white/80 text-xs mb-0.5">
+                    <span className="text-base-100/80 text-xs mb-0.5">
                       {typeof comparisonResult === "string" ? comparisonResult : comparisonResult.toFixed(2)}
                       {unit}
                     </span>
@@ -198,7 +198,7 @@ export default function PerformanceOverlay({
           })}
 
           {/* Footer with explanation */}
-          <div className="mt-2 pt-1 border-t border-white/20 text-[10px] text-white/50">
+          <div className="mt-2 pt-1 border-t border-base-100/20 text-[10px] text-base-100/50">
             {showComparison ? `Comparing ${athleteName} to ${comparisonName}` : "Compared to DFB-50 benchmark"}
           </div>
         </div>

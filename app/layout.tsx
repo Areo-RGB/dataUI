@@ -1,6 +1,5 @@
 import type React from "react"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
+import { poppins, lexend } from "@/lib/fonts"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 
@@ -18,7 +17,7 @@ export const metadata = {
     statusBarStyle: "default",
     title: "Finley Dashboard",
   },
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -27,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
+    <html lang="en" className={cn(poppins.variable, lexend.variable)}>
       <head>
         <meta name="application-name" content="Finley Dashboard" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

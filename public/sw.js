@@ -11,7 +11,6 @@ self.addEventListener("install", (event) => {
         "/offline",
         "/",
         "/dashboard",
-        "/task",
         "/comparison",
         "/videos",
         "/icons/icon-192x192.png",
@@ -62,6 +61,6 @@ function updateCache(request, response) {
 self.addEventListener("refreshOffline", (response) =>
   caches.open(CACHE).then((cache) => {
     console.log("[PWA] Offline page updated from refreshOffline event")
-    return cache.addAll(["/offline", "/", "/dashboard", "/task", "/comparison", "/videos"])
+    return cache.addAll(["/offline", "/", "/dashboard", "/comparison", "/videos"])
   }),
 )
