@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
 export default function Content() {
-  const [isExpanded, setIsExpanded] = useState(true)
+  const [isExpanded, setIsExpanded] = useState(false)
   const [cardsCollapsed, setCardsCollapsed] = useState(false)
 
   const toggleExpanded = () => {
